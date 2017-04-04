@@ -1,0 +1,313 @@
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+     <meta charset="UTF-8">
+        <title>Time appending function</title>
+          <link rel="stylesheet" href="style.css">
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+        <script src="map.js"></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtU7Z_r_-qxKBRmrC7TYUbPkYp1ECJJgE&callback=initMap">
+    </script>
+
+    </head>
+
+    <body>
+      <div class="container">
+      <div class= "row">
+        <div class="col-lg-12">
+        <div id="map"></div>
+        </div>
+      </div>
+        <div class="col-lg-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Add Event</h3>
+            </div>
+            <div class="panel-body">
+              <div id="userName"></div>
+              <form role="form">
+                <!-- <div class="form-group">
+                  <label for="userName-input">User Name</label>
+                  <display class="form-control" id="userName-input" type="text">
+                </div> -->
+                <div class="form-group">
+                  <label for="location-input">Select Location</label>
+                  <select class="form-control" id="location-input">
+                    <option>Please pick a location..</option>
+                    <option>Bennu Coffee</option>
+                    <option>Epoch Coffee</option>
+                    <option>Mozarts Coffee Roasters</option>
+                    <option>Radio</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="arrival-input">Arrival</label>
+                  <input class="form-control" id= "arrival-input" type= "time">
+                </div>
+                <div class="form-group">
+                  <label for="departure-input">Departure</label>
+                  <input class="form-control" id="departure-input" type="time">
+                </div>
+                <!-- <div class="form-group">
+                  <label for="status-input">Status:</label>
+                  <select class="form-control" id="status-input">
+                    <option>Checked In</option>
+                    <option>Checked Out</option>
+                  </select>
+                </div> -->
+                <button class="btn" id="add-userSchedule" type="button">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="col-lg-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Event Schedule</h3>
+            </div>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th><b>Location</b></th>
+                  <th><b>User</b></th>
+                  <th><b>Arrival Time</b></th>
+                  <th><b>Departure Time</b></th>
+                  <th><b>Status</b></th>
+                </tr>
+              </thead>
+              <tbody class="tableData">
+              </tbody>
+              <!-- <tbody class= "locationTwo">
+                <tr>
+                  <td> <b>Location Two</b> </td>
+                  <td id="locationTwoStart"> 11:00 AM</td>
+                  <td id="locationTwoEnd">6:00 pm</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tbody class= "locationThree">
+                <tr>
+                  <td> <b>Location Three</b> </td>
+                  <td id="locationThreeStart"> 8:00 AM</td>
+                  <td id="locationThreeEnd"> 5:00 pm</td>
+                  <td></td>
+                </tr>
+              </tbody> -->
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+    <script type="text/javascript" src="login.js"></script>
+
+  <script>
+
+  if (name[0] === "[") {
+    window.location.replace("login.html");
+  }
+
+
+    //global variables//
+    var eventStart;
+    var eventEnd;
+    var location;
+    var userName;
+    var userArrival;
+    var userDeparture;
+    var userStatus;
+    var thisMeetUp = {};
+    var allMeetUps = {};
+
+    // Create a variable to reference the database
+              var database = firebase.database();
+
+    //left to do: breaks if you start with a null value//
+
+    $("#userName").html('<h3>' + name + '</h3>');
+
+
+    //location selector//
+
+    $("#add-userSchedule").on("click", function(event)
+    {
+      event.preventDefault();
+
+      ///defining methods inside of click event//
+
+      var printUserSchedule = function()
+      { $(".tableData").append(" <tr><td> "
+        + location + "</td><td>"
+        + name + "</td><td>"
+        + userArrival+"</td><td>"
+        + userDeparture + "</td><td>"
+        + userStatus );
+      };
+
+      var findEventStart =  function()
+      {
+        if ( eventStart === undefined || eventStart === "Invalid date")
+        {
+            eventStart = moment(userArrival, "hh:mm a").format("hh:mm a");
+        }
+        else if (moment(eventStart, "hh:mm a").isAfter(moment(userArrival, "hh:mm a")))
+        {
+          eventStart = moment(userArrival, "hh:mm a").format("hh:mm a");
+        }
+          $("#" + location + "Start").html(eventStart);
+      };
+      var findEventEnd =  function()
+      {
+        if ( eventEnd === undefined || eventEnd === "Invalid date")
+          {
+            eventEnd = moment(userDeparture, "hh:mm a").format("hh:mm a");
+          }
+        else if (moment(eventEnd, "hh:mm a").isBefore(moment(userDeparture, "hh:mm a")))
+          {
+            eventEnd = moment(userDeparture, "hh:mm a").format("hh:mm a");
+          }
+          $("#" + location + "End").html(eventEnd);
+      };
+
+      var preventUserStupidity = function()
+      {
+        if (moment(userArrival, "hh:mm a").isAfter(moment(userDeparture, "hh:mm a")))
+        {
+          alert("try again stupid");
+        }else
+        {
+
+      findEventStart();
+      findEventEnd();
+        };
+      };
+
+      function createMeetUp(name, location, userArrival, userDeparture) {
+              var newMeetUpData = {
+                  name: name,
+                  location: location,
+                  userArrival: userArrival,
+                  userDeparture: userDeparture
+              };
+              return database.ref("/meetUps/"+location).push(newMeetUpData);
+          }
+
+      var location = $("#location-input").val();
+      var userName = name
+      console.log("name" + userName + name);
+      var userArrival = moment($("#arrival-input").val(), "hh:mm a").format('hh:mm a');
+      var userDeparture = moment($("#departure-input").val(), "hh:mm a").format('hh:mm a');
+      console.log(userArrival);
+      preventUserStupidity();
+      createMeetUp(name,location,userArrival,userDeparture);
+
+    });
+  function displayMeetUp() {
+    var count = 0;
+
+  database.ref("/meetUps").on("child_added", function(snapshot) {
+
+    newMeetUp = snapshot.val();
+
+    $.each(newMeetUp, function(index, value) {
+    getUserStatus(value.userArrival, value.userDeparture);
+
+    // CREATE TABLE
+
+    // ROW
+    var meetUpLine = $("<tr id=\"meetUp" + count + "\">");
+
+    // CELL - ORGANIZOR NAME
+    var meetOrganizor = $("<td id=\"organizor" + count + "\">");
+
+    // CELL - LOCATION
+    var meetLocation = $("<td id=\"location" + count + "\">");
+
+    // CELL - START TIME
+    var meetStart = $("<td id=\"start" + count + "\">");
+
+    // CELL - END TIME
+    var meetEnd = $("<td id=\"end" + count + "\">");
+
+    // CELL - DURATION
+    var meetDuration = $("<td id=\"duration" + count + "\">");
+
+    // CELL - STATUS
+    var meetStatus = $("<td id=\"status" + count + "\">")
+
+    // APPEND CELLS TO ROW
+
+    meetUpLine.append(meetOrganizor);
+
+    meetUpLine.append(meetLocation);
+
+    meetUpLine.append(meetStart);
+
+    meetUpLine.append(meetEnd);
+
+    meetUpLine.append(meetStatus);
+
+    // APPEND TO EXISTING TABLE - deezMeetUps
+
+    $(".tableData").append(meetUpLine);
+
+    // WRITE TO SCREEN
+
+    $("#organizor" + count).html(value.name);
+
+    $("#location" + count).html(value.location);
+
+    $("#start" + count).html(value.userArrival);
+
+    $("#end" + count).html(value.userDeparture);
+
+    $("#status" + count).html(userStatus);
+
+    startTime = parseInt(value.start);
+
+    endTime = parseInt(value.end);
+
+    // Calculate duration.
+
+
+    if (endTime - startTime < 100) {
+        duration = (endTime - startTime);
+        $("#duration" + newMeetUp.count).html(duration + " minutes");
+    } else {
+        duration = (endTime - startTime) / 100;
+        $("#duration" + newMeetUp.count).html(duration + " hours");
+    }
+    count ++;
+     })
+
+  },
+
+  // FIREBASE ERRORS
+
+  function(errorObject) {
+    console.log("Errors handled: " + errorObject.code);
+  });
+  function getUserStatus(arrivalTime, departureTime) {
+    if (moment(moment(),"hh:mm a").isBefore(moment(arrivalTime,"hh:mm a"))) {
+      userStatus = "Pre-Arrival"
+    }
+    else if (moment(moment(),"hh:mm a").isAfter(moment(departureTime,"hh:mm a"))) {
+      userStatus = "Departed"
+    }
+    else {
+      userStatus = "Present";
+    }
+  };
+  }
+      displayMeetUp();
+
+    </script>
+
+    </body>
+    </html>
