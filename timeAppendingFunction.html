@@ -31,10 +31,6 @@
             <div class="panel-body">
               <div id="userName"></div>
               <form role="form">
-                <!-- <div class="form-group">
-                  <label for="userName-input">User Name</label>
-                  <display class="form-control" id="userName-input" type="text">
-                </div> -->
                 <div class="form-group">
                   <label for="location-input">Select Location</label>
                   <select class="form-control" id="location-input">
@@ -83,22 +79,6 @@
               </thead>
               <tbody class="tableData">
               </tbody>
-              <!-- <tbody class= "locationTwo">
-                <tr>
-                  <td> <b>Location Two</b> </td>
-                  <td id="locationTwoStart"> 11:00 AM</td>
-                  <td id="locationTwoEnd">6:00 pm</td>
-                  <td></td>
-                </tr>
-              </tbody>
-              <tbody class= "locationThree">
-                <tr>
-                  <td> <b>Location Three</b> </td>
-                  <td id="locationThreeStart"> 8:00 AM</td>
-                  <td id="locationThreeEnd"> 5:00 pm</td>
-                  <td></td>
-                </tr>
-              </tbody> -->
             </table>
           </div>
         </div>
@@ -124,6 +104,10 @@
     var userStatus;
     var thisMeetUp = {};
     var allMeetUps = {};
+    var allUsers = [];
+    var userCount = 1;
+    var overWriteTime = false;
+    var overWriteUser = false;
 
     // Create a variable to reference the database
               var database = firebase.database();
@@ -150,29 +134,30 @@
         + userStatus );
       };
 
-      var findEventStart =  function()
+      var findEventStart =  function(beginTime)
       {
         if ( eventStart === undefined || eventStart === "Invalid date")
         {
-            eventStart = moment(userArrival, "hh:mm a").format("hh:mm a");
+            eventStart = moment(beginTime, "hh:mm a").format("hh:mm a");
         }
-        else if (moment(eventStart, "hh:mm a").isAfter(moment(userArrival, "hh:mm a")))
+        else if (moment(eventStart, "hh:mm a").isAfter(moment(beginTime, "hh:mm a")))
         {
-          eventStart = moment(userArrival, "hh:mm a").format("hh:mm a");
+          eventStart = moment(beginTime, "hh:mm a").format("hh:mm a");
         }
-          $("#" + location + "Start").html(eventStart);
+          console.log(eventStart);
       };
-      var findEventEnd =  function()
+      var findEventEnd =  function(stopTime)
       {
         if ( eventEnd === undefined || eventEnd === "Invalid date")
           {
-            eventEnd = moment(userDeparture, "hh:mm a").format("hh:mm a");
+            eventEnd = moment(stopTime, "hh:mm a").format("hh:mm a");
           }
-        else if (moment(eventEnd, "hh:mm a").isBefore(moment(userDeparture, "hh:mm a")))
+        else if (moment(eventEnd, "hh:mm a").isBefore(moment(stopTime, "hh:mm a")))
           {
-            eventEnd = moment(userDeparture, "hh:mm a").format("hh:mm a");
+            eventEnd = moment(stopTime, "hh:mm a").format("hh:mm a");
           }
-          $("#" + location + "End").html(eventEnd);
+          // $("#" + location + "End").html(eventEnd);
+          console.log(eventEnd);
       };
 
       var preventUserStupidity = function()
@@ -183,27 +168,88 @@
         }else
         {
 
-      findEventStart();
-      findEventEnd();
+      findEventStart(userArrival);
+      findEventEnd(userDeparture);
         };
       };
 
       function createMeetUp(name, location, userArrival, userDeparture) {
+
+
+        database.ref("/meetUps/"+location).on("child_added", function(snapshot, prevChildKey) {
+              overWriteTime = false;
+              overWriteUser = false;
+
+              var dbSnap = snapshot.val();
+              console.log(dbSnap);
+              console.log(dbSnap.key);
+              console.log(dbSnap.userCount);
+              console.log(prevChildKey);
+              if (dbSnap.userCount === 1) {
+                userCount = dbSnap.userCount + 1;
+              }
+              else {
+                userCount = 1;
+              }
+
+              if (dbSnap.userArrival === userArrival && dbSnap.userDeparture === userDeparture) {
+                overWriteUser = true;
+              }
+
+              else{
+                overWriteTime = true;
+                findEventStart(dbSnap.userArrival)
+                findEventEnd(dbSnap.userDeparture)
+              }
+
+
+              if (dbSnap.users) {
+                allUsers = dbSnap.users;
+              }
+
+            });
+        if (allUsers.indexOf(name) === -1){
+          var userPush = name + " " + userArrival + " - " + userDeparture;
+                allUsers.push(userPush);
+              }
+        console.log("allusers "+allUsers);
+            if (overWriteTime) {
               var newMeetUpData = {
-                  name: name,
-                  location: location,
-                  userArrival: userArrival,
-                  userDeparture: userDeparture
+                  userArrival: eventStart,
+                  userDeparture: eventEnd,
+                  users: allUsers,
+                  userCount: userCount,
               };
-              return database.ref("/meetUps/"+location).push(newMeetUpData);
+            }
+            else {
+              var newMeetUpData = {
+                  userArrival: userArrival,
+                  userDeparture: userDeparture,
+                  users: allUsers,
+                  userCount: userCount,
+              };
+            }
+            
+              console.log(newMeetUpData.users);
+              console.log("meetupdata " + newMeetUpData);
+
+              if (overWriteUser || overWriteTime) {
+                console.log("YOU HIT GOLD");
+                return database.ref("/meetUps/"+location).set(newMeetUpData);
+                
+              }
+              else {
+                console.log("YOU FAILED");
+                return database.ref("/meetUps/"+location).push(newMeetUpData);
+
+              }
+                
           }
 
       var location = $("#location-input").val();
       var userName = name
-      console.log("name" + userName + name);
       var userArrival = moment($("#arrival-input").val(), "hh:mm a").format('hh:mm a');
       var userDeparture = moment($("#departure-input").val(), "hh:mm a").format('hh:mm a');
-      console.log(userArrival);
       preventUserStupidity();
       createMeetUp(name,location,userArrival,userDeparture);
 
