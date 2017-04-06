@@ -140,6 +140,8 @@
 
       var findEventStart =  function(beginTime)
       {
+        console.log(eventStart);
+        console.log(beginTime);
         if ( eventStart === undefined || eventStart === "Invalid date")
         {
             eventStart = moment(beginTime, "hh:mm a").format("hh:mm a");
@@ -152,6 +154,8 @@
       };
       var findEventEnd =  function(stopTime)
       {
+        console.log(eventEnd);
+        console.log(stopTime);
         if ( eventEnd === undefined || eventEnd === "Invalid date")
           {
             eventEnd = moment(stopTime, "hh:mm a").format("hh:mm a");
@@ -162,6 +166,7 @@
           }
           // $("#" + location + "End").html(eventEnd);
           console.log(eventEnd);
+
       };
 
       var preventUserStupidity = function()
@@ -179,12 +184,20 @@
 
       function createMeetUp(name, location, userArrival, userDeparture) {
 
+var snapy =[];
+var timy = [];
 
         database.ref("/meetUps/"+location).on("child_added", function(snapshot, prevChildKey) {
               overWriteTime = false;
               overWriteUser = false;
 
               var dbSnap = snapshot.val();
+
+              snapy = dbSnap;
+              timy.push(dbSnap);
+
+              
+
               console.log(dbSnap);
               console.log(dbSnap.key);
               console.log(dbSnap.userCount);
@@ -202,6 +215,29 @@
 
               else{
                 overWriteTime = true;
+
+              }
+
+            });
+
+              if (snapy) {
+
+                allUsers = snapy;
+              }
+
+        if (allUsers.indexOf(name) === -1){
+          var userPush = {
+            name: name, 
+            userArrival: userArrival,
+            userDeparture: userDeparture,
+        }
+                allUsers.push(name);
+              }
+        console.log("allusers "+allUsers);
+            if (overWriteTime) {
+              findEventStart(timy[0]);
+              findEventEnd(timy[2]);
+              
                 findEventStart(dbSnap.userArrival)
                 findEventEnd(dbSnap.userDeparture)
               }
@@ -244,6 +280,9 @@
               }
               else {
                 console.log("YOU FAILED");
+
+                return database.ref("/meetUps/"+location).set(newMeetUpData);
+
                 return database.ref("/meetUps/"+location).push(newMeetUpData);
 
               }
