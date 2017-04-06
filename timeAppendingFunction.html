@@ -1,370 +1,351 @@
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-    <head>
-     <meta charset="UTF-8">
-        <title>Time appending function</title>
-          <link rel="stylesheet" href="style.css">
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-        <script src="map.js"></script>
+  <head>
+    <meta charset="UTF-8">
+    <title>Time appending function</title>
+      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script src="map.js"></script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtU7Z_r_-qxKBRmrC7TYUbPkYp1ECJJgE&callback=initMap">
     </script>
+  </head>
 
-    </head>
-
-    <body>
-      <div class="container">
+  <body>
+    <div class="container">
       <div class= "row">
         <div class="col-lg-12">
-        <div id="map"></div>
+          <div id="map"></div>
         </div>
       </div>
-        <div class="col-lg-12">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Add Event</h3>
-            </div>
-            <div class="panel-body">
-              <div id="userName"></div>
-              <form role="form">
-                <div class="form-group">
-                  <label for="location-input">Select Location</label>
-                  <select class="form-control" id="location-input">
-                    <option>Please pick a location..</option>
-                    <option>Bennu Coffee</option>
-                    <option>Epoch Coffee</option>
-                    <option>Mozarts Coffee Roasters</option>
-                    <option>Radio</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="arrival-input">Arrival</label>
-                  <input class="form-control" id= "arrival-input" type= "time">
-                </div>
-                <div class="form-group">
-                  <label for="departure-input">Departure</label>
-                  <input class="form-control" id="departure-input" type="time">
-                </div>
-                <!-- <div class="form-group">
-                  <label for="status-input">Status:</label>
-                  <select class="form-control" id="status-input">
-                    <option>Checked In</option>
-                    <option>Checked Out</option>
-                  </select>
-                </div> -->
-                <button class="btn" id="add-userSchedule" type="button">Submit</button>
-              </form>
-            </div>
+      <div class="col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Add Event</h3>
           </div>
-        </div>
-        <br>
-        <div class="col-lg-12">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Event Schedule</h3>
-            </div>
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th><b>Location</b></th>
-                  <th><b>User</b></th>
-                  <th><b>Arrival Time</b></th>
-                  <th><b>Departure Time</b></th>
-                  <th><b>Status</b></th>
-                </tr>
-              </thead>
-              <tbody class="tableData">
-              </tbody>
-            </table>
+          <div class="panel-body">
+            <div id="userName"></div>
+            <form role="form">
+              <div class="form-group">
+                <label for="location-input">Select Location</label>
+                <select class="form-control" id="location-input">
+                  <option>Please pick a location..</option>
+                  <option>Bennu Coffee</option>
+                  <option>Epoch Coffee</option>
+                  <option>Mozarts Coffee Roasters</option>
+                  <option>Radio</option>
+                  <option>Wright Bros</option>
+                  <option>Thunderbird Coffee</option>
+                  <option>Dominican Joe</option>
+                  <option>Figure 8</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="arrival-input">Arrival</label>
+                <input class="form-control" id= "arrival-input" type= "time">
+              </div>
+              <div class="form-group">
+                <label for="departure-input">Departure</label>
+                <input class="form-control" id="departure-input" type="time">
+              </div>
+              <!-- <div class="form-group">
+                <label for="status-input">Status:</label>
+                <select class="form-control" id="status-input">
+                  <option>Checked In</option>
+                  <option>Checked Out</option>
+                </select>
+              </div> -->
+              <button class="btn" id="add-userSchedule" type="button">Submit</button>
+            </form>
           </div>
         </div>
       </div>
+      <br>
+      <div class="col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Event Schedule</h3>
+          </div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th><b>Location</b></th>
+                <th><b>User</b></th>
+                <th><b>Arrival Time</b></th>
+                <th><b>Departure Time</b></th>
+                <th><b>Status</b></th>
+              </tr>
+            </thead>
+            <tbody class="tableData">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
 
-
-    <script type="text/javascript" src="login.js"></script>
+  <script type="text/javascript" src="login.js"></script>
 
   <script>
 
+  //checks if user has logged in
   if (name[0] === "[") {
     window.location.replace("login.html");
   }
 
+  //global variables//
+  var eventStart;
+  var eventEnd;
+  var location;
+  var userName;
+  var userArrival;
+  var userDeparture;
+  var userStatus;
+  var thisMeetUp = {};
+  var allMeetUps = {};
+  var allUsers = [];
+  var userCount = 1;
+  var overWriteTime = false;
+  var overWriteUser = false;
 
-    //global variables//
-    var eventStart;
-    var eventEnd;
-    var location;
-    var userName;
-    var userArrival;
-    var userDeparture;
-    var userStatus;
-    var thisMeetUp = {};
-    var allMeetUps = {};
-    var allUsers = [];
-    var userCount = 1;
-    var overWriteTime = false;
-    var overWriteUser = false;
+  // Create a variable to reference the database
+  var database = firebase.database();
 
-    // Create a variable to reference the database
-              var database = firebase.database();
+  //displays user's name
+  $("#userName").html('<h3>' + name + '</h3>');
 
-    //left to do: breaks if you start with a null value//
+  //location selector//
+  $("#add-userSchedule").on("click", function(event)
+  {
+    event.preventDefault();
 
-    $("#userName").html('<h3>' + name + '</h3>');
+    ///defining methods inside of click event//
+    var printUserSchedule = function() {
+     $(".tableData").append(" <tr><td> "
+      + location + "</td><td>"
+      + name + "</td><td>"
+      + userArrival+"</td><td>"
+      + userDeparture + "</td><td>"
+      + userStatus );
+    };
 
+    var findEventStart =  function(beginTime) {
+console.log(eventStart);
+console.log(beginTime);
 
-    //location selector//
+      if ( eventStart === undefined || eventStart === "Invalid date") {
+        eventStart = moment(beginTime, "hh:mm a").format("hh:mm a");
+      }
 
-    $("#add-userSchedule").on("click", function(event)
-    {
-      event.preventDefault();
+      else if (moment(eventStart, "hh:mm a").isAfter(moment(beginTime, "hh:mm a"))) {
+        eventStart = moment(beginTime, "hh:mm a").format("hh:mm a");
+      }
+console.log(eventStart);
+    };
 
-      ///defining methods inside of click event//
+    var findEventEnd =  function(stopTime) {
+console.log(eventEnd);
+console.log(stopTime);
 
-      var printUserSchedule = function()
-      { $(".tableData").append(" <tr><td> "
-        + location + "</td><td>"
-        + name + "</td><td>"
-        + userArrival+"</td><td>"
-        + userDeparture + "</td><td>"
-        + userStatus );
+      if ( eventEnd === undefined || eventEnd === "Invalid date") {
+        eventEnd = moment(stopTime, "hh:mm a").format("hh:mm a");
+      }
+
+      else if (moment(eventEnd, "hh:mm a").isBefore(moment(stopTime, "hh:mm a"))) {
+        eventEnd = moment(stopTime, "hh:mm a").format("hh:mm a");
+      }
+        // $("#" + location + "End").html(eventEnd);
+console.log(eventEnd);
+    };
+
+    var preventUserStupidity = function() {
+      if (moment(userArrival, "hh:mm a").isAfter(moment(userDeparture, "hh:mm a"))) {
+        alert("try again stupid");
+      }
+      else {
+        findEventStart(userArrival);
+        findEventEnd(userDeparture);
       };
+    };
 
-      var findEventStart =  function(beginTime)
-      {
-        console.log(eventStart);
-        console.log(beginTime);
-        if ( eventStart === undefined || eventStart === "Invalid date")
-        {
-            eventStart = moment(beginTime, "hh:mm a").format("hh:mm a");
+    function createMeetUp(name, location, userArrival, userDeparture) {
+
+      var snapy =[];
+      var timy = [];
+
+      database.ref("/meetUps/"+location).on("child_added", function(snapshot, prevChildKey) {
+        overWriteTime = false;
+        overWriteUser = false;
+
+        var dbSnap = snapshot.val();
+        snapy = dbSnap;
+        timy.push(dbSnap);
+
+        if (dbSnap.userCount === 1) {
+          userCount = dbSnap.userCount + 1;
         }
-        else if (moment(eventStart, "hh:mm a").isAfter(moment(beginTime, "hh:mm a")))
-        {
-          eventStart = moment(beginTime, "hh:mm a").format("hh:mm a");
+        else {
+          userCount = 1;
         }
-          console.log(eventStart);
-      };
-      var findEventEnd =  function(stopTime)
-      {
-        console.log(eventEnd);
-        console.log(stopTime);
-        if ( eventEnd === undefined || eventEnd === "Invalid date")
-          {
-            eventEnd = moment(stopTime, "hh:mm a").format("hh:mm a");
-          }
-        else if (moment(eventEnd, "hh:mm a").isBefore(moment(stopTime, "hh:mm a")))
-          {
-            eventEnd = moment(stopTime, "hh:mm a").format("hh:mm a");
-          }
-          // $("#" + location + "End").html(eventEnd);
-          console.log(eventEnd);
 
-      };
+        if (dbSnap.userArrival === userArrival && dbSnap.userDeparture === userDeparture) {
+          overWriteUser = true;
+        }
+        else{
+          overWriteTime = true;
+        }
+      });
 
-      var preventUserStupidity = function()
-      {
-        if (moment(userArrival, "hh:mm a").isAfter(moment(userDeparture, "hh:mm a")))
-        {
-          alert("try again stupid");
-        }else
-        {
+      if (snapy) {
+        allUsers = snapy;
+      }
 
-      findEventStart(userArrival);
-      findEventEnd(userDeparture);
+      if (allUsers.indexOf(name) === -1){
+        // var userPush = {
+        //   name: name, 
+        //   userArrival: userArrival,
+        //   userDeparture: userDeparture,
+        // }
+        allUsers.push(name);
+      }
+console.log("allusers "+allUsers);
+      if (overWriteTime) {
+        findEventStart(timy[0]);
+        findEventEnd(timy[2]);
+        var newMeetUpData = {
+          location: location,
+          userArrival: eventStart,
+          userDeparture: eventEnd,
+          users: allUsers,
+          userCount: userCount,
         };
-      };
+      }
+      else {
+        var newMeetUpData = {
+          location: location,
+          userArrival: userArrival,
+          userDeparture: userDeparture,
+          users: allUsers,
+          userCount: userCount,
+        };
+      } 
+console.log(newMeetUpData.users);
+console.log("meetupdata " + newMeetUpData);
 
-      function createMeetUp(name, location, userArrival, userDeparture) {
+      return database.ref("/meetUps/"+location).set(newMeetUpData);   
+    }
 
-var snapy =[];
-var timy = [];
-        database.ref("/meetUps/"+location).on("child_added", function(snapshot, prevChildKey) {
-              overWriteTime = false;
-              overWriteUser = false;
+    var location = $("#location-input").val();
+    var userName = name
+    var userArrival = moment($("#arrival-input").val(), "hh:mm a").format('hh:mm a');
+    var userDeparture = moment($("#departure-input").val(), "hh:mm a").format('hh:mm a');
+    preventUserStupidity();
+    createMeetUp(name,location,userArrival,userDeparture);
 
-              var dbSnap = snapshot.val();
-              snapy = dbSnap;
-              timy.push(dbSnap);
+  });
 
-              
-              if (dbSnap.userCount === 1) {
-                userCount = dbSnap.userCount + 1;
-              }
-              else {
-                userCount = 1;
-              }
-
-              if (dbSnap.userArrival === userArrival && dbSnap.userDeparture === userDeparture) {
-                overWriteUser = true;
-              }
-
-              else{
-                overWriteTime = true;
-              }
-
-            });
-
-              if (snapy) {
-
-                allUsers = snapy;
-              }
-
-        if (allUsers.indexOf(name) === -1){
-          var userPush = {
-            name: name, 
-            userArrival: userArrival,
-            userDeparture: userDeparture,
-        }
-                allUsers.push(name);
-              }
-        console.log("allusers "+allUsers);
-            if (overWriteTime) {
-              findEventStart(timy[0]);
-              findEventEnd(timy[2]);
-              var newMeetUpData = {
-                  userArrival: eventStart,
-                  userDeparture: eventEnd,
-                  users: allUsers,
-                  userCount: userCount,
-              };
-            }
-            else {
-              var newMeetUpData = {
-                  userArrival: userArrival,
-                  userDeparture: userDeparture,
-                  users: allUsers,
-                  userCount: userCount,
-              };
-            }
-            
-              console.log(newMeetUpData.users);
-              console.log("meetupdata " + newMeetUpData);
-
-              if (overWriteUser || overWriteTime) {
-                console.log("YOU HIT GOLD");
-                return database.ref("/meetUps/"+location).set(newMeetUpData);
-                
-              }
-              else {
-                console.log("YOU FAILED");
-                return database.ref("/meetUps/"+location).set(newMeetUpData);
-
-              }
-                
-          }
-
-      var location = $("#location-input").val();
-      var userName = name
-      var userArrival = moment($("#arrival-input").val(), "hh:mm a").format('hh:mm a');
-      var userDeparture = moment($("#departure-input").val(), "hh:mm a").format('hh:mm a');
-      preventUserStupidity();
-      createMeetUp(name,location,userArrival,userDeparture);
-
-    });
   function displayMeetUp() {
     var count = 0;
 
-  database.ref("/meetUps").on("child_added", function(snapshot) {
+    database.ref("/meetUps").on("value", function(snapshot) {
 
-    newMeetUp = snapshot.val();
+      newMeetUp = snapshot.val();
 
-    $.each(newMeetUp, function(index, value) {
-    getUserStatus(value.userArrival, value.userDeparture);
+      $.each(newMeetUp, function(index, value) {
+        getUserStatus(value.userArrival, value.userDeparture);
+console.log(value);
+console.log(newMeetUp);
+console.log(snapshot);
 
-    // CREATE TABLE
+        // CREATE TABLE
 
-    // ROW
-    var meetUpLine = $("<tr id=\"meetUp" + count + "\">");
+        // ROW
+        var meetUpLine = $("<tr id=\"meetUp" + count + "\">");
 
-    // CELL - ORGANIZOR NAME
-    var meetOrganizor = $("<td id=\"organizor" + count + "\">");
+        // CELL - ORGANIZOR NAME
+        var meetOrganizor = $("<td id=\"organizor" + count + "\">");
 
-    // CELL - LOCATION
-    var meetLocation = $("<td id=\"location" + count + "\">");
+        // CELL - LOCATION
+        var meetLocation = $("<td id=\"location" + count + "\">");
 
-    // CELL - START TIME
-    var meetStart = $("<td id=\"start" + count + "\">");
+        // CELL - START TIME
+        var meetStart = $("<td id=\"start" + count + "\">");
 
-    // CELL - END TIME
-    var meetEnd = $("<td id=\"end" + count + "\">");
+        // CELL - END TIME
+        var meetEnd = $("<td id=\"end" + count + "\">");
 
-    // CELL - DURATION
-    var meetDuration = $("<td id=\"duration" + count + "\">");
+        // CELL - DURATION
+        var meetDuration = $("<td id=\"duration" + count + "\">");
 
-    // CELL - STATUS
-    var meetStatus = $("<td id=\"status" + count + "\">")
+        // CELL - STATUS
+        var meetStatus = $("<td id=\"status" + count + "\">")
 
-    // APPEND CELLS TO ROW
+        // APPEND CELLS TO ROW
 
-    meetUpLine.append(meetOrganizor);
+        meetUpLine.append(meetOrganizor);
 
-    meetUpLine.append(meetLocation);
+        meetUpLine.append(meetLocation);
 
-    meetUpLine.append(meetStart);
+        meetUpLine.append(meetStart);
 
-    meetUpLine.append(meetEnd);
+        meetUpLine.append(meetEnd);
 
-    meetUpLine.append(meetStatus);
+        meetUpLine.append(meetStatus);
 
-    // APPEND TO EXISTING TABLE - deezMeetUps
+        // APPEND TO EXISTING TABLE - deezMeetUps
+        $(".tableData").empty();
+        $(".tableData").append(meetUpLine);
 
-    $(".tableData").append(meetUpLine);
+        // WRITE TO SCREEN
 
-    // WRITE TO SCREEN
+        $("#organizor" + count).html(value.users);
 
-    $("#organizor" + count).html(value.name);
+        $("#location" + count).html(value.location);
 
-    $("#location" + count).html(value.location);
+        $("#start" + count).html(value.userArrival);
 
-    $("#start" + count).html(value.userArrival);
+        $("#end" + count).html(value.userDeparture);
 
-    $("#end" + count).html(value.userDeparture);
+        $("#status" + count).html(userStatus);
 
-    $("#status" + count).html(userStatus);
+        startTime = parseInt(value.start);
 
-    startTime = parseInt(value.start);
+        endTime = parseInt(value.end);
 
-    endTime = parseInt(value.end);
-
-    // Calculate duration.
+        // Calculate duration.
 
 
-    if (endTime - startTime < 100) {
-        duration = (endTime - startTime);
-        $("#duration" + newMeetUp.count).html(duration + " minutes");
-    } else {
-        duration = (endTime - startTime) / 100;
-        $("#duration" + newMeetUp.count).html(duration + " hours");
-    }
-    count ++;
-     })
+        if (endTime - startTime < 100) {
+            duration = (endTime - startTime);
+            $("#duration" + newMeetUp.count).html(duration + " minutes");
+        } else {
+            duration = (endTime - startTime) / 100;
+            $("#duration" + newMeetUp.count).html(duration + " hours");
+        }
+        count ++;
+      })
+    }, function(errorObject) {
+      console.log("Errors handled: " + errorObject.code);
+    });
 
-  },
-
-  // FIREBASE ERRORS
-
-  function(errorObject) {
-    console.log("Errors handled: " + errorObject.code);
-  });
-  function getUserStatus(arrivalTime, departureTime) {
-    if (moment(moment(),"hh:mm a").isBefore(moment(arrivalTime,"hh:mm a"))) {
-      userStatus = "Pre-Arrival"
-    }
-    else if (moment(moment(),"hh:mm a").isAfter(moment(departureTime,"hh:mm a"))) {
-      userStatus = "Departed"
-    }
-    else {
-      userStatus = "Present";
-    }
-  };
+    function getUserStatus(arrivalTime, departureTime) {
+      if (moment(moment(),"hh:mm a").isBefore(moment(arrivalTime,"hh:mm a"))) {
+        userStatus = "Pre-Arrival"
+      }
+      else if (moment(moment(),"hh:mm a").isAfter(moment(departureTime,"hh:mm a"))) {
+        userStatus = "Departed"
+      }
+      else {
+        userStatus = "Present";
+      }
+    };
   }
-      displayMeetUp();
+  displayMeetUp();
 
-    </script>
+  </script>
 
-    </body>
-    </html>
+  </body>
+</html>
