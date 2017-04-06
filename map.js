@@ -26,6 +26,18 @@ function initMap() {
   ];
 
   // Info Window Content
+
+    var markers = [
+        ['Bennu, Austin', 30.279798,-97.719583],
+        ['Epoch, Austin', 30.318604,-97.724540],
+        ['Radio, Austin', 30.231537,-97.787776],
+        ['Mozart, Austin', 30.295245,-97.784398],
+        ['Wright, Austin', 30.264564,-97.733129],
+        ['Thunder, Austin', 30.284407,-97.719395],
+        ['Dominican, Austin', 30.255973,-97.746568],
+        ['Figure, Austin', 30.266921,-97.719931]
+    ];
+    // Info Window Content
   var infoWindowContent = [
     ['<div class="info_content">' + '<h3>Bennu Coffee</h3>' + '<p>Students gather at this chill, cozy 24/7 cafe pouring fair trade cofee drinks, plus light fare.</p>' + '<p><b>Address:</b> 2001 E Martin Luther King Jr Blvd, Austin, TX 78702<br>' + '<p><b>Hours:</b> Open 24 hours</p>' + '<p><b>Phone:</b> (512)478-4700<p>' + '<br><button class="btn btn-default" id="bennuCheckIn" type="button"> Select Location </button></div>'],
 
@@ -107,3 +119,39 @@ $(document).on("click", '#figureCheckIn', function() {
   $("#location-input").val('Figure 8');
   $("#figureCheckIn").remove()
 });
+
+  $(document).on("click", '#mozartCheckIn', function()
+  {
+    $("#location-input").val("Mozarts Coffee Roasters");
+    $("#mozartCheckIn").remove()
+  });
+
+  $(document).on("click", '#radioCheckIn', function()
+  {
+    $("#location-input").val('Radio');
+    $("#radioCheckIn").remove()
+  });
+
+  $(document).on("click", '#wrightCheckIn', function()
+  {
+    $("#location-input").val('Wright Bros');
+    $("#wrightCheckIn").remove()
+  });
+
+  $(document).on("click", '#thunderCheckIn', function()
+  {
+    $("#location-input").val('Thunderbird Coffee');
+    $("#thunderCheckIn").remove()
+  });
+
+  $(document).on("click", '#dominicanCheckIn', function()
+  {
+    $("#location-input").val('Dominican Joe');
+    $("#dominicanCheckIn").remove()
+  });
+
+  $(document).on("click", '#figureCheckIn', function()
+  {
+    $("#location-input").val('Figure 8');
+    $("#figureCheckIn").remove()
+  });
