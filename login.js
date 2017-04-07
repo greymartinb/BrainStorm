@@ -1,4 +1,4 @@
-// Initialize Firebase
+// INITIALIZE DATABASE //
 
 var name = window.name || {};
 var config = {
@@ -12,8 +12,12 @@ var config = {
 
 firebase.initializeApp(config);
 
-// Create a variable to reference the database
+// DATABASE VARIABLE//
+
 var database = firebase.database();
+
+// GLOBAL VARIABLES //
+
 var userName = "";
 var password = "";
 var exists = false;
@@ -21,95 +25,149 @@ var users = database.ref("/users");
 var whales = false;
 // var name = "";
 
-$(".user").on("click", function(event) {
-    $(".firstChoice").attr("hidden", "hidden");
+// USER PICKS EXISTING USER OR NEW USER.
 
+$(".user").on("click", function(event) {
+    $(".firstChoice").hide();
+
+    // IF EXISTING SHOW existing DIV...
 
     if ($(this).val() === "existing") {
-        $(".secondChoice").removeAttr("hidden", "hidden");
+        $(".existing").show();
     } else {
-        $(".thirdChoice").removeAttr("hidden", "hidden");
+    // ELSE SHOW new.
+        $(".new").show();
     }
 });
 
-/// SUPER IMPORTANT
+// SNAPSHOT OF CURRENT DATABASE CREATED.
 database.ref("/users").on("value", function(snapshot) {})
+
+// CAPTURE USERNAME AND PASSWORD FOR LOG IN.
 
 $("#login").on("click", function(event) {
     exists = false;
+
     console.log("second event");
+
     event.preventDefault();
+
+    // CAPTURE EXISTING USER INFO FROM FORM.
     userName = $("#userName").val().trim();
     password = $("#password").val().trim();
+    
+    // CREATE SNAPSHOT OF DATABASE WHEN CHILD IS ADDED.
     database.ref("/users").on("child_added", function(snapshot) {
+        // SNAPSHOT SAVED AS submission.
         var submission = snapshot.val();
 
-        if ((submission.userName === userName) && (submission.password === password)) {
+        // AUTHENTICATE
 
+        // IF USERNAME AND PASSWORD ENETERED IN FORM MATCH INFO IN DATABASE...
+        if ((submission.userName === userName) && (submission.password === password)) {
+            // exists IS TRUE.
             exists = true;
+
+            // PULL NAME FROM submission.
             name = submission.name;
         }
 
     }, function(errorObject) {
         console.log("Errors handled: " + errorObject.code);
     });
+
+
     exist();
 });
+
+// DUPLICATE CHECK
 
 $("#create").on("click", function(event) {
     exists = false;
     event.preventDefault();
+
     console.log("third event")
+
+    // CAPTURE NEW USER INFO FROM FORM.
     userName = $("#userNameInput").val();
     password = $("#passwordInput").val();
     name = $("#nameInput").val();
-    console.log(users.key);
-    if (users.key) {
-        database.ref("/users").on("child_added", function(snapshot) {
-            var submission = snapshot.val();
-            if (submission.userName === userName) {
-                exists = true;
 
+    console.log(users.key);
+
+    // IF THERE ARE USERS...
+    if (users.key) {
+        // CREATE NEW SNAPSHOT OF DATABASE.
+        database.ref("/users").on("child_added", function(snapshot) {
+            // SNAPSHOT SAVED AS SUBMISSION.
+            var submission = snapshot.val();
+
+            // IF ENTERED USERNAME IS FOUND IN SUBMISSION...
+            if (submission.userName === userName) {
+                // exists SET TO TRUE.
+                exists = true;
             }
 
         }, function(errorObject) {
             console.log("Errors handled: " + errorObject.code);
         });
+
         addNew();
+
     } else {
-        console.log("here");
+        // PUSH NEWLY CREATED USER DATA TO DATABASE.
         database.ref("/users").push({
             userName: userName,
             password: password,
             name: name
         });
+
+        console.log("here");
     }
 });
 
-
+// EXISTING USER AUTHENTICATION
 function exist() {
+    // IF exists IS TRUE...
     if (exists) {
-        $("#notificationShow").text("Hello " + name + "! Access Granted.  Redirecting you now.").addClass("accessGranted");
+        // NOTIFY USER THEY HAVE LOGGED IN AND ARE BEING REDIRECTED.
+        $("#notificationShow").text("Hello " + name + "! Access Granted.  Redirecting you now.").addClass("accessGranted").removeClass("accessDenied");
+        // REDIRECT DELAYED 5 SECONDS.
         setTimeout(function() {
             window.location.replace("timeAppendingFunction.html");
         }, 5000);
-
-
-
     } else {
-        $("#notificationShow").text("Access Denied").addClass("accessDenied");
+        // ELSE (exists being false) NOTIFY USER ACCESS IS DENIED.
+        $("#notificationShow").text("Access Denied.").addClass("accessDenied").removeClass("accessGranted");
+        // REMOVE ACCESS DENIED MESSAGE AFTER 2.5 SECONDS.
+        setTimeout(function() {
+            $("#notificationShow").text("");
+        }, 2500);
     }
 }
 
+// ADD NEW USER
 function addNew() {
+    // IF exists IS TRUE...
     if (exists) {
-        $("#notificationShow").append("This user already exists").addClass("accessDenied");
+        // NOTIFY USER THEY ALREADY HAVE A LOGIN.
+        $("#notificationShow").append("This user already exists.").addClass("accessDenied").removeClass("accessGranted");
+        // REMOVE MESSAGE AFTER 2.5 SECONDS.
+        setTimeout(function() {
+            $("#notificationShow").text("");
+        }, 2500);
     } else {
+        // ELSE (exists being false) PUSH NEW USER FORM INFO TO DATABASE.
         database.ref("/users").push({
             userName: userName,
             password: password,
-            name: name,
+            name: name
         });
-        $("#notificationShow").append("New user created").addClass("accessGranted");
+        // NOTIFY USER THEY CAN NOW LOGIN BY SELECTING "Existing User".
+        $("#notificationShow").append("New user created.  When page reloads select \"Existing User\".").addClass("accessGranted").removeClass("accessDenied");
+        // RELOAD PAGE AFTER 2.5 SECONDS.
+        setTimeout(function() {
+            window.location.reload();
+        }, 2500);
     }
 }

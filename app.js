@@ -16,7 +16,7 @@ var userCount = 1;
 var overWriteTime = false;
 var overWriteUser = false;
 
-// DATABASE //
+// DATABASE  VARIABLE//
 var database = firebase.database();
 
 // FORCE USER LOG IN
