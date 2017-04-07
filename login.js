@@ -33,10 +33,10 @@ $(".user").on("click", function(event) {
     // IF EXISTING SHOW existing DIV...
 
     if ($(this).val() === "existing") {
-        $(".existing").show();
+        $(".existing").removeClass("hidden")();
     } else {
     // ELSE SHOW new.
-        $(".new").show();
+        $(".new").removeClass("hidden");
     }
 });
 
