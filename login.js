@@ -27,20 +27,17 @@ $(".user").on("click", function(event) {
 
     if ($(this).val() === "existing") {
         $(".secondChoice").removeAttr("hidden", "hidden");
-    }
-
-    else {
+    } else {
         $(".thirdChoice").removeAttr("hidden", "hidden");
     }
 });
 
 /// SUPER IMPORTANT
-database.ref("/users").on("value", function(snapshot) {
-})
+database.ref("/users").on("value", function(snapshot) {})
 
 $("#login").on("click", function(event) {
     exists = false;
-console.log("second event");
+    console.log("second event");
     event.preventDefault();
     userName = $("#userName").val().trim();
     password = $("#password").val().trim();
@@ -49,8 +46,8 @@ console.log("second event");
 
         if ((submission.userName === userName) && (submission.password === password)) {
 
-        exists = true;
-        name = submission.name;
+            exists = true;
+            name = submission.name;
         }
 
     }, function(errorObject) {
@@ -62,7 +59,7 @@ console.log("second event");
 $("#create").on("click", function(event) {
     exists = false;
     event.preventDefault();
-console.log("third event")
+    console.log("third event")
     userName = $("#userNameInput").val();
     password = $("#passwordInput").val();
     name = $("#nameInput").val();
@@ -78,39 +75,41 @@ console.log("third event")
         }, function(errorObject) {
             console.log("Errors handled: " + errorObject.code);
         });
-            addNew();
-    }
-    else {
-console.log("here");
+        addNew();
+    } else {
+        console.log("here");
         database.ref("/users").push({
-          userName: userName,
-          password: password,
-          name: name
+            userName: userName,
+            password: password,
+            name: name
         });
     }
 });
 
 
 function exist() {
-    if(exists) {
-        $("#stuff").text("Access Granted Hello " + name).css("color", "green");
-        window.location.replace("timeAppendingFunction.html");
-        }
-        else {
-            $("#stuff").text("Access Denied").css("color", "red");
-        }
+    if (exists) {
+        $("#notificationShow").text("Hello " + name + "! Access Granted.  Redirecting you now.").addClass("accessGranted");
+        setTimeout(function() {
+            window.location.replace("timeAppendingFunction.html");
+        }, 5000);
+
+
+
+    } else {
+        $("#notificationShow").text("Access Denied").addClass("accessDenied");
+    }
 }
 
 function addNew() {
-    if(exists) {
-        $("#stuff").append("This user already exists").css("color", "red");
-    }
-    else {
+    if (exists) {
+        $("#notificationShow").append("This user already exists").addClass("accessDenied");
+    } else {
         database.ref("/users").push({
-          userName: userName,
-          password: password,
-          name: name,
+            userName: userName,
+            password: password,
+            name: name,
         });
-        $("#stuff").append("New user created").css("color", "green");
+        $("#notificationShow").append("New user created").addClass("accessGranted");
     }
 }
