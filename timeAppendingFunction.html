@@ -22,7 +22,6 @@
           <div id="map"></div>
         </div>
       </div>
-
       <div class="col-lg-12">
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -62,47 +61,6 @@
               </div> -->
               <button class="btn" id="add-userSchedule" type="button">Submit</button>
             </form>
-        <div class="col-lg-12">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Add Event</h3>
-            </div>
-            <div class="panel-body">
-              <div id="userName"></div>
-              <form role="form">
-                <div class="form-group">
-                  <label for="location-input">Select Location</label>
-                  <select class="form-control" id="location-input">
-                    <option>Please pick a location..</option>
-                    <option>Bennu Coffee</option>
-                    <option>Epoch Coffee</option>
-                    <option>Mozarts Coffee Roasters</option>
-                    <option>Radio</option>
-                    <option>Wright Bros</option>
-                    <option>Thunderbird Coffee</option>
-                    <option>Dominican Joe</option>
-                    <option>Figure 8</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="arrival-input">Arrival</label>
-                  <input class="form-control" id= "arrival-input" type= "time">
-                </div>
-                <div class="form-group">
-                  <label for="departure-input">Departure</label>
-                  <input class="form-control" id="departure-input" type="time">
-                </div>
-                <!-- <div class="form-group">
-                  <label for="status-input">Status:</label>
-                  <select class="form-control" id="status-input">
-                    <option>Checked In</option>
-                    <option>Checked Out</option>
-                  </select>
-                </div> -->
-                <button class="btn" id="add-userSchedule" type="button">Submit</button>
-              </form>
-            </div>
-
           </div>
         </div>
       </div>
@@ -276,45 +234,6 @@ console.log("allusers "+allUsers);
       } 
 console.log(newMeetUpData.users);
 console.log("meetupdata " + newMeetUpData);
-      };
-
-      function createMeetUp(name, location, userArrival, userDeparture) {
-
-var snapy =[];
-var timy = [];
-
-        database.ref("/meetUps/"+location).on("child_added", function(snapshot, prevChildKey) {
-              overWriteTime = false;
-              overWriteUser = false;
-
-              var dbSnap = snapshot.val();
-
-              snapy = dbSnap;
-              timy.push(dbSnap);
-
-              
-
-              console.log(dbSnap);
-              console.log(dbSnap.key);
-              console.log(dbSnap.userCount);
-              console.log(prevChildKey);
-              if (dbSnap.userCount === 1) {
-                userCount = dbSnap.userCount + 1;
-              }
-              else {
-                userCount = 1;
-              }
-
-              if (dbSnap.userArrival === userArrival && dbSnap.userDeparture === userDeparture) {
-                overWriteUser = true;
-              }
-
-              else{
-                overWriteTime = true;
-
-              }
-
-            });
 
       return database.ref("/meetUps/"+location).set(newMeetUpData);   
     }
@@ -326,78 +245,8 @@ var timy = [];
     preventUserStupidity();
     createMeetUp(name,location,userArrival,userDeparture);
 
-
   });
-        if (allUsers.indexOf(name) === -1){
-          var userPush = {
-            name: name, 
-            userArrival: userArrival,
-            userDeparture: userDeparture,
-        }
-                allUsers.push(name);
-              }
-        console.log("allusers "+allUsers);
-            if (overWriteTime) {
-              findEventStart(timy[0]);
-              findEventEnd(timy[2]);
-              
-                findEventStart(dbSnap.userArrival)
-                findEventEnd(dbSnap.userDeparture)
-              }
 
-
-              if (dbSnap.users) {
-                allUsers = dbSnap.users;
-              }
-
-            });
-        if (allUsers.indexOf(name) === -1){
-          var userPush = name + " " + userArrival + " - " + userDeparture;
-                allUsers.push(userPush);
-              }
-        console.log("allusers "+allUsers);
-            if (overWriteTime) {
-              var newMeetUpData = {
-                  userArrival: eventStart,
-                  userDeparture: eventEnd,
-                  users: allUsers,
-                  userCount: userCount,
-              };
-            }
-            else {
-              var newMeetUpData = {
-                  userArrival: userArrival,
-                  userDeparture: userDeparture,
-                  users: allUsers,
-                  userCount: userCount,
-              };
-            }
-            
-              console.log(newMeetUpData.users);
-              console.log("meetupdata " + newMeetUpData);
-
-              if (overWriteUser || overWriteTime) {
-                console.log("YOU HIT GOLD");
-                return database.ref("/meetUps/"+location).set(newMeetUpData);
-                
-              }
-              else {
-                console.log("YOU FAILED");
-
-                return database.ref("/meetUps/"+location).set(newMeetUpData);
-
-                return database.ref("/meetUps/"+location).push(newMeetUpData);
-
-              }
-                
-          }
-
-      var location = $("#location-input").val();
-      var userName = name
-      var userArrival = moment($("#arrival-input").val(), "hh:mm a").format('hh:mm a');
-      var userDeparture = moment($("#departure-input").val(), "hh:mm a").format('hh:mm a');
-      preventUserStupidity();
-      createMeetUp(name,location,userArrival,userDeparture);
   function displayMeetUp() {
     var count = 0;
 
