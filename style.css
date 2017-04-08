@@ -1,8 +1,70 @@
+label {
+    margin-top: 10px;
+    margin-left: -5px;
+    font-weight: 700;
+}
+
 #map {
-        height: 400px;
-        width: 100%;
-        margin: 0 auto;
-        margin-top: 15px;
-        margin-bottom: 15px;
-        overflow: auto;
-       }
+    height: 400px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    overflow: auto;
+}
+
+#notificationShow {
+	text-align: center;
+	font-weight: 700;
+	font-size: 14px;
+}
+
+.big {
+    width: 100%;
+}
+
+.jumbotron {
+    width: 100%;
+    text-align: center;
+}
+
+.user {
+    margin: 80px auto;
+}
+
+.firstChoice {
+    height: 200px;
+    width: 400px;
+    text-align: center;
+    margin: 10px auto;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+.existing {
+    height: 280px;
+    width: 400px;
+    margin: 10px auto;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+.new {
+    height: 400px;
+    width: 400px;
+    margin: 10px auto;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+.accessGranted {
+	color: green;
+}
+
+.accessDenied {
+	color: red;
+}
+
+.hidden {
+	display: none;
+}
