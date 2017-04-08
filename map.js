@@ -1,4 +1,61 @@
-function initMap() {
+
+       var markers = [
+    ['Bennu, Austin', 30.279798,-97.719583],
+    ['Epoch, Austin', 30.318604,-97.724540],
+    ['Radio, Austin', 30.231537,-97.787776],
+    ['Mozart, Austin', 30.295245,-97.784398],
+    ['Wright, Austin', 30.264564,-97.733129],
+    ['Thunder, Austin', 30.284407,-97.719395],
+    ['Dominican, Austin', 30.255973,-97.746568],
+    ['Figure, Austin', 30.266921,-97.719931]
+  ];
+
+
+
+
+
+
+      var milesToMeters = function(miles) 
+      {
+        radius = miles * 1609;
+      };
+    var radius = 2.5;
+    milesToMeters(radius);
+    var query= "query=coffee"
+    var ajaxUrl = "https://maps.googleapis.com/maps/api/place/textsearch/json?";
+    var startPoint = "&location=30.2870271,-97.7291743";
+    var ajaxRadius = "&radius=" + radius;
+    var type = "&type=cafe";
+    var key = "&key=AIzaSyDFA-U0Wx6fkEdc3gpWAZeCSO8ZGupUGPc";
+
+    
+    console.log(ajaxUrl + query+ startPoint + ajaxRadius + type + key);
+    var radiusCall = function()
+      {
+          $.ajax({
+              url: (ajaxUrl + query+ startPoint + ajaxRadius + type + key),
+              method: "GET",
+              dataType: 'json'
+          }).done(function(data) {
+              for(var i = 0; i< data.results.length; i++)
+              {
+                markers.push([data.results[i].name+ ", Austin", data.results[i].geometry.location.lat,data.results[i].geometry.location.lng]);
+                
+              }
+          });
+          return markers;
+          console.log(markers.length);
+      };
+
+
+
+
+  radiusCall();
+
+
+
+
+var initMap= function(){
   var bounds = new google.maps.LatLngBounds();
   var austin = {lat: 30.2672, lng: -97.7431};
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -12,18 +69,10 @@ function initMap() {
   var marker = new google.maps.Marker({
     position: {lat: 30.2672, lng: 97.7431},
     map: map
-  });
+    });
 
-  var markers = [
-    ['Bennu, Austin', 30.279798,-97.719583],
-    ['Epoch, Austin', 30.318604,-97.724540],
-    ['Radio, Austin', 30.231537,-97.787776],
-    ['Mozart, Austin', 30.295245,-97.784398],
-    ['Wright, Austin', 30.264564,-97.733129],
-    ['Thunder, Austin', 30.284407,-97.719395],
-    ['Dominican, Austin', 30.255973,-97.746568],
-    ['Figure, Austin', 30.266921,-97.719931]
-  ];
+
+
 
   // Info Window Content
   var infoWindowContent = [
@@ -41,10 +90,13 @@ function initMap() {
 
     ['<div class="info_content">' + '<h3>Dominican Joe</h3>' + '<p>Plenty of seating, outlets, ample lighting, and music that doesn\'t overpower your own.</p>' + '<p><b>Address:</b> 515 S Congress Ave, Austin, TX 78704<br>' + '<p><b>Hours:</b> Monday-Friday: 6:30AM-11PM, Saturday & Sunday: 7:00AM-11:00PM</p>' + '<p><b>Phone:</b> (512)448-3919<p>' + '<br><button class="btn btn-default" id="dominicanCheckIn" type="button"> Select Location </button></div>'],
 
-    ['<div class="info_content">' + '<h3>Figure 8 Coffee Purveyors</h3>' + '<p>Inviting coffee shop that offers ideal atmosphere and layout for getting work done. Plenty of natural sunlight, free Wi-Fi and a friendly staff.</p>' + '<p><b>Address:</b> 515 S Congress Ave, Austin, TX 78704<br>' + '<p><b>Hours:</b> 7AM-10PM </p>' + '<p><b>Phone:</b> (512)953-1061<p>' + '<br><button class="btn btn-default" id="figureCheckIn" type="button"> Select Location </button></div>'],
+    ['<div class="info_content">' + '<h3>Figure 8 Coffee Purveyors</h3>' + '<p>Inviting coffee shop that offers ideal atmosphere and layout for getting work done. Plenty of natural sunlight, free Wi-Fi and a friendly staff.</p>' + '<p><b>Address:</b> 515 S Congress Ave, Austin, TX 78704<br>' + '<p><b>Hours:</b> 7AM-10PM </p>' + '<p><b>Phone:</b> (512)953-1061<p>' + '<br><button class="btn btn-default" id="figureCheckIn" type="button"> Select Location </button></div>']
+
   ];
 
   // Display multiple markers on a map
+  console.log(markers);
+  console.log(markers.length);
   var infoWindow = new google.maps.InfoWindow(), marker, i;
   for( i = 0; i < markers.length; i++ ) {
     var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
@@ -65,7 +117,7 @@ function initMap() {
 
     // Automatically center the map fitting all markers on the screen
     map.fitBounds(bounds);
-  }
+  };
 }
 
 $(document).on("click", '#bennuCheckIn', function() {
