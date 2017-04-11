@@ -13,13 +13,19 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtU7Z_r_-qxKBRmrC7TYUbPkYp1ECJJgE&callback=initMap">
     </script>
+    <script src="weatherAjax.js"></script>
   </head>
 
   <body>
     <div class="container">
       <div class= "row">
         <div class="col-lg-12">
-          <div id="map"></div>
+          <div id="map">
+          </div>
+        </div>
+        </div>
+        <div class="row">
+          <div id="weather">
         </div>
       </div>
       <div class="col-lg-12">
@@ -96,6 +102,7 @@
     window.location.replace("login.html");
   }
 
+  updateWeather();
   //global variables//
   var eventStart;
   var eventEnd;
@@ -110,6 +117,9 @@
   var userCount = 1;
   var overWriteTime = false;
   var overWriteUser = false;
+  var overbookedCheck = [];
+  var users = [];
+  var userTime = [];
 
   // Create a variable to reference the database
   var database = firebase.database();
@@ -133,9 +143,8 @@
     };
 
     var findEventStart =  function(beginTime) {
-console.log(eventStart);
-console.log(beginTime);
-
+// console.log(eventStart);
+// console.log(beginTime);
       if ( eventStart === undefined || eventStart === "Invalid date") {
         eventStart = moment(beginTime, "hh:mm a").format("hh:mm a");
       }
@@ -147,9 +156,8 @@ console.log(eventStart);
     };
 
     var findEventEnd =  function(stopTime) {
-console.log(eventEnd);
-console.log(stopTime);
-
+// console.log(eventEnd);
+// console.log(stopTime);
       if ( eventEnd === undefined || eventEnd === "Invalid date") {
         eventEnd = moment(stopTime, "hh:mm a").format("hh:mm a");
       }
@@ -158,7 +166,7 @@ console.log(stopTime);
         eventEnd = moment(stopTime, "hh:mm a").format("hh:mm a");
       }
         // $("#" + location + "End").html(eventEnd);
-console.log(eventEnd);
+// console.log(eventEnd);
     };
 
     var preventUserStupidity = function() {
@@ -204,14 +212,14 @@ console.log(eventEnd);
       }
 
       if (allUsers.indexOf(name) === -1){
-        // var userPush = {
-        //   name: name, 
-        //   userArrival: userArrival,
-        //   userDeparture: userDeparture,
-        // }
-        allUsers.push(name);
+        var userPush = {
+          name: name, 
+          userArrival: userArrival,
+          userDeparture: userDeparture,
+        }
+        allUsers.push(userPush);
       }
-console.log("allusers "+allUsers);
+// console.log("allusers "+allUsers);
       if (overWriteTime) {
         findEventStart(timy[0]);
         findEventEnd(timy[2]);
@@ -232,8 +240,8 @@ console.log("allusers "+allUsers);
           userCount: userCount,
         };
       } 
-console.log(newMeetUpData.users);
-console.log("meetupdata " + newMeetUpData);
+// console.log(newMeetUpData.users);
+// console.log("meetupdata " + newMeetUpData);
 
       return database.ref("/meetUps/"+location).set(newMeetUpData);   
     }
@@ -245,20 +253,29 @@ console.log("meetupdata " + newMeetUpData);
     preventUserStupidity();
     createMeetUp(name,location,userArrival,userDeparture);
 
+
   });
 
   function displayMeetUp() {
+
+
     var count = 0;
 
     database.ref("/meetUps").on("value", function(snapshot) {
+      $(".tableData").empty();
 
       newMeetUp = snapshot.val();
 
       $.each(newMeetUp, function(index, value) {
+
         getUserStatus(value.userArrival, value.userDeparture);
 console.log(value);
-console.log(newMeetUp);
-console.log(snapshot);
+console.log(value.users);
+console.log(value.users[0].name);
+
+
+// console.log(newMeetUp);
+// console.log(snapshot);
 
         // CREATE TABLE
 
@@ -296,12 +313,17 @@ console.log(snapshot);
         meetUpLine.append(meetStatus);
 
         // APPEND TO EXISTING TABLE - deezMeetUps
-        $(".tableData").empty();
+        
         $(".tableData").append(meetUpLine);
-
+        var users = [];
+        var userTime = [];
         // WRITE TO SCREEN
-
-        $("#organizor" + count).html(value.users);
+        for (i = 0; i < value.users.length; i++) {
+          users.push(value.users[i].name);
+          userTime.push(value.users[i]);
+        }
+        console.log(userTime);
+        $("#organizor" + count).html(users);
 
         $("#location" + count).html(value.location);
 
@@ -311,9 +333,21 @@ console.log(snapshot);
 
         $("#status" + count).html(userStatus);
 
-        startTime = parseInt(value.start);
+        overbookedCheck[count] = [
+            locality= value.location,
+            peopleHere= userTime
+          ]
+        
+        // (value.location, users)
+console.log("new functionality " + overbookedCheck);
+console.log(overbookedCheck[0]);
+console.log(overbookedCheck[1]);
 
-        endTime = parseInt(value.end);
+        startTime = parseInt(value.userArrival);
+        eventStart = moment(value.userArrival, "hh:mm a").format('hh:mm a');
+
+        endTime = parseInt(value.userDeparture);
+        eventEnd = moment(value.userDeparture, "hh:mm a").format('hh:mm a');
 
         // Calculate duration.
 
