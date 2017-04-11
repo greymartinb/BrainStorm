@@ -1,64 +1,71 @@
 <!DOCTYPE html>
 <html lang="en-us">
 
-    <head>
-        <meta charset="utf-8">
-        <title>Login Page</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <!-- jQuery -->
-        <script src="https://code.jquery.com/jquery.js"></script>
+<head>
+    <meta charset="utf-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- LINK TO FIREBASE GOES HERE -->
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+</head>
 
-        <!-- LINK TO FIREBASE GOES HERE -->
-        <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-    </head>
-    <body>
-        <div class="container">
-            <div class="firstChoice">
-                <button class="btn btn-default user" value="existing" type="submit">Existing User</button>
-                <button class="btn btn-default user" value="new" type="submit">New User</button>
-            </div>
-            <div class="row">
-                <div class="secondChoice" hidden="hidden">
-                    <div class="col-lg-5">
-                        <label for="signin">Login</label>
-                        <form role="form" id="signin">
-                        <!-- <form role="form" action="/timeAppendingFunction.html" method="get"> -->
-                            <div class="form-group">
-                                <label for="userName">User Name</label>
-                                <input class="form-control" id="userName" type="text">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input class="form-control" id="password" type="text">
-                            </div>
-                            <button class="btn btn-default" id="login" type="submit">Login</button>
-                        </form>
-                    </div>
-                </div>
-                <div class="thirdChoice" hidden="hidden">
-                    <div class="col-lg-5">
-                        <label for="signup">Sign Up</label>
-                        <form role="form" id="signup">
-                        <!-- <form role="form" action="/dbcall.php" method="post"> -->
-                            <div class="form-group">
-                                <label for="userName">User Name</label>
-                                <input class="form-control" id="userNameInput" type="text">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input class="form-control" id="passwordInput" type="text">
-                            </div>
-                            <div class="form-group">
-                                <label for="nameInput">Name</label>
-                                <input class="form-control" id="nameInput" type="text">
-                            </div>
-                            <button class="btn btn-default" id="create" type="submit">Submit</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div id="stuff"></div>
+<body>
+    <div class="big container">
+        <div class="jumbotron">
+            <h1>Meet Smarter</h1></div>
+    </div>
+    <div class="container">
+        <div class="firstChoice">
+            <button class="btn btn-default user" value="existing" type="submit">Existing User</button>
+            <button class="btn btn-default user" value="new" type="submit">New User</button>
         </div>
-        <script type="text/javascript" src="login.js"></script>
-    </body>
+        <div class="row">
+            <div class="existing hidden">
+                <div class="col-lg-5">
+                    <label for="signin">Login</label>
+                    <form role="form" id="signin">
+                        <!-- <form role="form" action="/timeAppendingFunction.html" method="get"> -->
+                        <div class="form-group">
+                            <label for="userName">User Name</label>
+                            <input class="form-control" id="userName" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input class="form-control" id="password" type="password">
+                        </div>
+                        <button class="btn btn-default" id="login" type="submit">Login</button>
+                    </form>
+                </div>
+            </div>
+            <div class="new hidden">
+                <div class="col-lg-5">
+                    <label for="signup">Sign Up</label>
+                    <form role="form" id="signup">
+                        <!-- <form role="form" action="/dbcall.php" method="post"> -->
+                        <div class="form-group">
+                            <label for="userName">User Name</label>
+                            <input class="form-control" id="userNameInput" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input class="form-control" id="passwordInput" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="nameInput">Name</label>
+                            <input class="form-control" id="nameInput" type="text">
+                        </div>
+                        <button class="btn btn-default" id="create" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="notificationShow"></div>
+    </div>
+    <script type="text/javascript" src="login.js"></script>
+</body>
+
 </html>
