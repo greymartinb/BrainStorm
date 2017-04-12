@@ -1,9 +1,24 @@
+html, body {
+
+
+}
 label {
     margin-top: 10px;
     margin-left: -5px;
     font-weight: 700;
 }
-
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #064382;
+}
+#navText {
+  padding-top: 10px;
+  color: #FFFFFF;
+  text-align: center;
+}
 #map {
     height: 400px;
     width: 100%;
@@ -12,61 +27,94 @@ label {
     margin-bottom: 15px;
     overflow: auto;
 }
-
 #notificationShow {
     text-align: center;
     font-weight: 700;
     font-size: 14px;
     clear: both;
 }
-
 #clicky:hover {
     text-decoration: underline;
 }
-
 .big {
     width: 100%;
 }
-
 .jumbotron {
     width: 100%;
     text-align: center;
-    background: url(mapBack.png);
+    background: url(images/banner.jpeg);
 }
-
+.jumbotron h1 {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 92px;
+  color: #FFFFFF;
+}
+.user {
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+  color: #064382;
+  margin: 40px auto 30px auto;
+  border: 1px solid #064382;
+}
 .panel-heading {
 	background: #93D3F6!important;
 }
-
-.user {
-    margin: 80px auto 10px auto;
+#clicky {
+  font-family: 'Roboto', sans-serif;
+  font-size: 28px;
+  padding-bottom: 10px;
 }
-
 .firstChoice {
-    height: 200px;
-    width: 400px;
+    height: 25%;
+    width: 50%;
     text-align: center;
     margin: 10px auto;
-    border: 1px solid #cccccc;
+    border: 5px solid #064382;
     border-radius: 4px;
 }
+.loginStyle {
+  text-align: center;
+  margin-left: 110px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
 
+}
 .existing {
     height: 280px;
     width: 400px;
     margin: 10px auto;
-    border: 1px solid #cccccc;
+    border: 5px solid #064382;
     border-radius: 4px;
 }
-
 .new {
-    height: 415px;
+    height: 475px;
     width: 400px;
     margin: 10px auto;
-    border: 1px solid #cccccc;
+    border: 5px solid #064382;
     border-radius: 4px;
+    padding-bottom: 5px;
 }
-
+#visual {
+  width: 75%;
+  height: 75%;
+  border: 5px solid #064382;
+}
+.appInfo {
+  font-family: 'Roboto', sans-serif;
+  font-size: 22px;
+}
+.list {
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+}
+/* Back to Login button Styling */
+#backToLogin {
+  padding: 0;
+}
+#showy {
+  margin-right: 150px;
+}
+/* End */
 .accessGranted {
     color: green;
 }
@@ -85,6 +133,8 @@ label {
 
 .notAs {
     text-align: left;
+    border: 5px solid #064382;
+    width: 40%;
 }
 
 .jaunty {
@@ -102,6 +152,7 @@ label {
 
 .header {
     height: 10%;
+    margin-bottom: 50px;
 }
 
 .body {

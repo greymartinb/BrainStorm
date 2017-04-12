@@ -5,29 +5,35 @@
     <meta charset="utf-8">
     <title>Login Page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Permanent+Marker|Walter+Turncoat" rel="stylesheet">
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="style.css">
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
-    <!-- LINK TO FIREBASE GOES HERE -->
+    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
 </head>
 
 <body>
-    <div class="big header container">
+    <div class="big header">
         <div class="jumbotron">
             <h1>Meet Smarter</h1>
         </div>
     </div>
     <div class="big body container">
         <div class="firstChoice">
-            <button class="btn btn-default user" value="existing" type="submit">Existing User</button>
-            <button class="btn btn-default user" value="new" type="submit">New User</button>
+            <button class="btn btn-default user" value="existing" type="submit">Login</button>
+            <button class="btn btn-default user" value="new" type="submit">Sign Up</button>
             <p id="clicky" class="teal">What is Meet Smarter?</p>
         </div>
         <div class="row">
             <div class="existing hidden">
-                <div class="col-lg-5">
+                <div class="col-lg-5 loginStyle">
                     <label for="signin">Login</label>
                     <form role="form" id="signin">
                         <!-- <form role="form" action="/timeAppendingFunction.html" method="get"> -->
@@ -39,12 +45,13 @@
                             <label for="password">Password</label>
                             <input class="form-control" id="password" type="password">
                         </div>
+                        <button class="btn btn-default" id="backForExisting" type="submit">Back</button>
                         <button class="btn btn-default" id="login" type="submit">Login</button>
                     </form>
                 </div>
             </div>
             <div class="new hidden">
-                <div class="col-lg-5">
+                <div class="col-lg-5 loginStyle">
                     <label for="signup">Sign Up</label>
                     <form role="form" id="signup">
                         <!-- <form role="form" action="/dbcall.php" method="post"> -->
@@ -63,46 +70,52 @@
                         <div class="form-group">
                             <label for="nameInput">Name</label>
                             <input class="form-control" id="nameInput" type="text" placeholder="Jane Smith">
-                        </div>
+                            <br>
+                        <button class="btn btn-default" id="backForCreate" type="submit">Back</button>
                         <button class="btn btn-default" id="create" type="submit">Submit</button>
+                        </div>
                     </form>
                 </div>
             </div>
             <div class="whatAreWe hidden">
-                <h2>Meet Smarter helps you schedule meet ups with classmates and co-workers.</h2>
+                <!-- <h2>Meet Smarter helps you schedule meet ups with classmates and co-workers.</h2> -->
                 <div class="jaunty col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <img src="imhere.jpg" class="map" alt="A visual representation of the Meet Smarter app's functionality.">
+                    <img id="visual" src="images/imhere.jpg" class="map" alt="A visual representation of the Meet Smarter's functionality.">
                 </div>
                 <div class="notAs jaunty col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <p class="aubergine"><strong>Not sure where to meet?</strong>
+                    <p class="appInfo"><strong>Not sure where to meet?</strong>
                         <ul class="list">
-                            <li>Use Meet Smarter's map functionality to schedule a Meet Up at a local coffee shop.</li>
+                            <li>Use Meet Smarter's map functionality to meet at a local coffee shop.</li>
                         </ul>
                     </p>
-                    <p class="coral"><strong>Need in person help?</strong>
+                    <p class="appInfo"><strong>Need in person help?</strong>
                         <ul class="list">
                             <li>Use Meet Smarter to view upcoming meets ups among your cohort.</li>
                         </ul>
                     </p>
-                    <p class="tangerine"><strong>Want to invite others to your meet up?</strong>
+                    <p class="appInfo"><strong>Want to invite others to your meet up?</strong>
                         <ul class="list">
                             <li>Meet Smarter's slack integration alerts your cohort when you create an event.  No need to send out invites!</li>
                         </ul>
                     </p>
-                    <p class="purple"><strong>Not sure if should you schedule time at the coffee place with only outdoor seating?</strong>
+                    <p class="appInfo"><strong>Plan on meeting outside?</strong>
                         <ul class="list">
                             <li>Meet Smarter's weather integration helps ensure your meet up doesn't get rained out!</li>
                         </ul>
                     </p>
                 </div>
-                <div class="sad">
-                    <h3 class="mapGrey">Meet Smarter can help.</h3>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" id="backToLogin">
+                  <button class="btn btn-default user" id="showy">Back to Login</button>
                 </div>
+
             </div>
         </div>
-        <div id="notificationShow"></div>
-    </div>
-    <div class="big footer"></div>
+          <div id="notificationShow"></div>
+    <nav class="navbar navbar-default navbar-bottom" role="navigation">
+  <div class="container">
+    <p id="navText">Owned by Grey.<p>
+  </div>
+</nav>
     <script type="text/javascript" src="login.js"></script>
 </body>
 
