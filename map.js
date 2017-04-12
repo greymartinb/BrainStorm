@@ -26,6 +26,26 @@ function initMap() {
   ];
 
   // Info Window Content
+<<<<<<< Updated upstream
+=======
+
+    var markers = [
+        ['Bennu, Austin', 30.279798,-97.719583],
+        ['Epoch, Austin', 30.318604,-97.724540],
+        ['Radio, Austin', 30.231537,-97.787776],
+        ['Mozart, Austin', 30.295245,-97.784398],
+        ['Wright, Austin', 30.264564,-97.733129],
+        ['Thunder, Austin', 30.284407,-97.719395],
+        ['Dominican, Austin', 30.255973,-97.746568],
+        ['Figure, Austin', 30.266921,-97.719931]
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
+    ];
+    // Info Window Content
+>>>>>>> Stashed changes
   var infoWindowContent = [
     ['<div class="info_content">' + '<h3>Bennu Coffee</h3>' + '<p>Students gather at this chill, cozy 24/7 cafe pouring fair trade cofee drinks, plus light fare.</p>' + '<p><b>Address:</b> 2001 E Martin Luther King Jr Blvd, Austin, TX 78702<br>' + '<p><b>Hours:</b> Open 24 hours</p>' + '<p><b>Phone:</b> (512)478-4700<p>' + '<br><button class="btn btn-default" id="bennuCheckIn" type="button"> Select Location </button></div>'],
 
@@ -42,6 +62,10 @@ function initMap() {
     ['<div class="info_content">' + '<h3>Dominican Joe</h3>' + '<p>Plenty of seating, outlets, ample lighting, and music that doesn\'t overpower your own.</p>' + '<p><b>Address:</b> 515 S Congress Ave, Austin, TX 78704<br>' + '<p><b>Hours:</b> Monday-Friday: 6:30AM-11PM, Saturday & Sunday: 7:00AM-11:00PM</p>' + '<p><b>Phone:</b> (512)448-3919<p>' + '<br><button class="btn btn-default" id="dominicanCheckIn" type="button"> Select Location </button></div>'],
 
     ['<div class="info_content">' + '<h3>Figure 8 Coffee Purveyors</h3>' + '<p>Inviting coffee shop that offers ideal atmosphere and layout for getting work done. Plenty of natural sunlight, free Wi-Fi and a friendly staff.</p>' + '<p><b>Address:</b> 515 S Congress Ave, Austin, TX 78704<br>' + '<p><b>Hours:</b> 7AM-10PM </p>' + '<p><b>Phone:</b> (512)953-1061<p>' + '<br><button class="btn btn-default" id="figureCheckIn" type="button"> Select Location </button></div>'],
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
   ];
 
   // Display multiple markers on a map
