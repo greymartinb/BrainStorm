@@ -1,8 +1,155 @@
+label {
+    margin-top: 10px;
+    margin-left: -5px;
+    font-weight: 700;
+}
+
 #map {
-        height: 400px;
-        width: 100%;
-        margin: 0 auto;
-        margin-top: 15px;
-        margin-bottom: 15px;
-        overflow: auto;
-       }
+    height: 400px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    overflow: auto;
+}
+
+#notificationShow {
+    text-align: center;
+    font-weight: 700;
+    font-size: 14px;
+    clear: both;
+}
+
+#clicky:hover {
+    text-decoration: underline;
+}
+
+.big {
+    width: 100%;
+}
+
+.jumbotron {
+    width: 100%;
+    text-align: center;
+    background: url(mapBack.png);
+}
+
+.panel-heading {
+	background: #93D3F6!important;
+}
+
+.user {
+    margin: 80px auto 10px auto;
+}
+
+.firstChoice {
+    height: 200px;
+    width: 400px;
+    text-align: center;
+    margin: 10px auto;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+.existing {
+    height: 280px;
+    width: 400px;
+    margin: 10px auto;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+.new {
+    height: 415px;
+    width: 400px;
+    margin: 10px auto;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+.accessGranted {
+    color: green;
+}
+
+.accessDenied {
+    color: red;
+}
+
+.hidden {
+    display: none;
+}
+
+.whatAreWe {
+    text-align: center;
+}
+
+.notAs {
+    text-align: left;
+}
+
+.jaunty {
+    float: left;
+    display: inline;
+    margin: 10px;
+}
+
+.list {
+    list-style: none;
+}
+
+.sad {
+    clear: both;
+}
+
+.header {
+    height: 10%;
+}
+
+.body {
+    height: 80%;
+}
+
+.footer {
+    background: #000000;
+    height: 10%;
+}
+
+.aubergine {
+    color: #662B4D;
+}
+
+.teal {
+    color: #529E6A;
+}
+
+.coral {
+    color: #E93533;
+}
+
+.ruddy {
+    color: #EB3532;
+}
+
+.tangerine {
+    color: #F07B00;
+}
+
+.purple {
+    color: #A8407C;
+}
+
+.mapBlue {
+    color: #93D3F6;
+}
+
+.mapGreen {
+    color: #9DCD85;
+}
+
+.mapGrey {
+    color: #808080;
+}
+
+.pretty {
+	background: #9DCD85;
+}
