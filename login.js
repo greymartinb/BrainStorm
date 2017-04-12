@@ -20,9 +20,17 @@ var database = firebase.database();
 
 var userName = "";
 var password = "";
+var confirmPassword = "";
 var exists = false;
 var users = database.ref("/users");
 var name = "";
+
+// USER DOESN'T KNOW WHAT MEET SMARTER IS
+
+$("#clicky").on("click", function(event) {
+    $(".firstChoice").hide();
+    $(".whatAreWe").removeClass("hidden");
+});
 
 // USER PICKS EXISTING USER OR NEW USER.
 
@@ -34,7 +42,7 @@ $(".user").on("click", function(event) {
     if ($(this).val() === "existing") {
         $(".existing").removeClass("hidden");
     } else {
-    // ELSE SHOW new.
+        // ELSE SHOW new.
         $(".new").removeClass("hidden");
     }
 });
@@ -54,7 +62,7 @@ $("#login").on("click", function(event) {
     // CAPTURE EXISTING USER INFO FROM FORM.
     userName = $("#userName").val().trim();
     password = $("#password").val().trim();
-    
+
     // CREATE SNAPSHOT OF DATABASE WHEN CHILD IS ADDED.
     database.ref("/users").on("child_added", function(snapshot) {
         // SNAPSHOT SAVED AS submission.
@@ -88,9 +96,10 @@ $("#create").on("click", function(event) {
     console.log("third event")
 
     // CAPTURE NEW USER INFO FROM FORM.
-    userName = $("#userNameInput").val();
-    password = $("#passwordInput").val();
-    name = $("#nameInput").val();
+    userName = $("#userNameInput").val().trim();
+    password = $("#passwordInput").val().trim();
+    confirmPassword = $("#passwordConfirm").val().trim();
+    name = $("#nameInput").val().trim();
 
     console.log(users.key);
 
@@ -156,17 +165,31 @@ function addNew() {
             $("#notificationShow").text("");
         }, 2500);
     } else {
-        // ELSE (exists being false) PUSH NEW USER FORM INFO TO DATABASE.
-        database.ref("/users").push({
-            userName: userName,
-            password: password,
-            name: name
-        });
-        // NOTIFY USER THEY CAN NOW LOGIN BY SELECTING "Existing User".
-        $("#notificationShow").append("New user created.  When page reloads select \"Existing User\".").addClass("accessGranted").removeClass("accessDenied");
-        // RELOAD PAGE AFTER 2.5 SECONDS.
-        setTimeout(function() {
-            window.location.reload();
-        }, 2500);
+        // ELSE (exists being false)
+        // CHECK passwordInput MATCHES passwordConfirm.
+        if (password !== confirmPassword) {
+            console.log(password);
+            console.log(confirmPassword);
+            // NOTIFY USER PASSWORDS MUST MATCH.
+            $("#notificationShow").append("Passwords must match.").addClass("accessDenied").removeClass("accessGranted");
+            // REMOVE MESSAGE AFTER 2.5 SECONDS.
+            setTimeout(function() {
+                $("#notificationShow").text("");
+            }, 2500);
+        } else {
+            // PUSH NEW USER FORM INFO TO DATABASE.
+            database.ref("/users").push({
+                userName: userName,
+                password: password,
+                name: name
+            });
+
+            // NOTIFY USER THEY CAN NOW LOGIN BY SELECTING "Existing User".
+            $("#notificationShow").append("New user created.  When page reloads select \"Existing User\".").addClass("accessGranted").removeClass("accessDenied");
+            // RELOAD PAGE AFTER 2.5 SECONDS.
+            setTimeout(function() {
+                window.location.reload();
+            }, 2500);
+        }
     }
 }

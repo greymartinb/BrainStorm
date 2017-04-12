@@ -14,14 +14,16 @@
 </head>
 
 <body>
-    <div class="big container">
+    <div class="big header container">
         <div class="jumbotron">
-            <h1>Meet Smarter</h1></div>
+            <h1>Meet Smarter</h1>
+        </div>
     </div>
-    <div class="container">
+    <div class="big body container">
         <div class="firstChoice">
             <button class="btn btn-default user" value="existing" type="submit">Existing User</button>
             <button class="btn btn-default user" value="new" type="submit">New User</button>
+            <p id="clicky" class="teal">What is Meet Smarter?</p>
         </div>
         <div class="row">
             <div class="existing hidden">
@@ -48,23 +50,59 @@
                         <!-- <form role="form" action="/dbcall.php" method="post"> -->
                         <div class="form-group">
                             <label for="userName">User Name</label>
-                            <input class="form-control" id="userNameInput" type="text">
+                            <input class="form-control" id="userNameInput" type="text" placeholder="jSmith">
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input class="form-control" id="passwordInput" type="text">
+                            <input class="form-control" id="passwordInput" type="text" placeholder="********">
+                        </div>
+                        <div class="form-group">
+                            <label for="password-confirm">Confirm Password</label>
+                            <input class="form-control" id="passwordConfirm" type="text" placeholder="********">
                         </div>
                         <div class="form-group">
                             <label for="nameInput">Name</label>
-                            <input class="form-control" id="nameInput" type="text">
+                            <input class="form-control" id="nameInput" type="text" placeholder="Jane Smith">
                         </div>
                         <button class="btn btn-default" id="create" type="submit">Submit</button>
                     </form>
                 </div>
             </div>
+            <div class="whatAreWe hidden">
+                <h2>Meet Smarter helps you schedule meet ups with classmates and co-workers.</h2>
+                <div class="jaunty col-lg-5">
+                    <img src="imhere.jpg" alt="A visual representation of the Meet Smarter app's functionality.">
+                </div>
+                <div class="notAs jaunty col-lg-5">
+                    <p class="aubergine"><strong>Not sure where to meet?</strong>
+                        <ul class="list">
+                            <li>Use Meet Smarter's map functionality to schedule a Meet Up at a local coffee shop.</li>
+                        </ul>
+                    </p>
+                    <p class="coral"><strong>Need in person help?</strong>
+                        <ul class="list">
+                            <li>Use Meet Smarter to view upcoming meets ups among your cohort.</li>
+                        </ul>
+                    </p>
+                    <p class="tangerine"><strong>Want to invite others to your meet up?</strong>
+                        <ul class="list">
+                            <li>Meet Smarter's slack integration alerts your cohort when you create an event.  No need to send out invites!</li>
+                        </ul>
+                    </p>
+                    <p class="purple"><strong>Not sure if should you schedule time at the coffee place with only outdoor seating?</strong>
+                        <ul class="list">
+                            <li>Meet Smarter's weather integration helps ensure your meet up doesn't get rained out!</li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="sad">
+                    <h3 class="mapGrey">Meet Smarter can help.</h3>
+                </div>
+            </div>
         </div>
         <div id="notificationShow"></div>
     </div>
+    <div class="big footer"></div>
     <script type="text/javascript" src="login.js"></script>
 </body>
 
