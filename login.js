@@ -1,6 +1,6 @@
 // INITIALIZE DATABASE //
 
-var name = window.name || {};
+var name = window.name || [];
 var config = {
     apiKey: "AIzaSyC623OOx9z-PSUKTVYgGCvO_BOJuHQlHjw",
     authDomain: "testing123-b28a4.firebaseapp.com",
@@ -23,7 +23,7 @@ var password = "";
 var confirmPassword = "";
 var exists = false;
 var users = database.ref("/users");
-var name = "";
+
 
 // USER DOESN'T KNOW WHAT MEET SMARTER IS
 
@@ -142,8 +142,8 @@ function exist() {
         $("#notificationShow").text("Hello " + name + "! Access Granted.  Redirecting you now.").addClass("accessGranted").removeClass("accessDenied");
         // REDIRECT DELAYED 5 SECONDS.
         setTimeout(function() {
-            window.location.replace("index.html");
-        }, 5000);
+            window.location.replace("timeAppendingFunction.html");
+        }, 3000);
     } else {
         // ELSE (exists being false) NOTIFY USER ACCESS IS DENIED.
         $("#notificationShow").text("Access Denied.").addClass("accessDenied").removeClass("accessGranted");

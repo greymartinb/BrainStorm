@@ -89,8 +89,7 @@ label {
 
 .jaunty {
     float: left;
-    display: inline;
-    margin: 10px;
+    margin-top: 15px;
 }
 
 .list {
@@ -152,4 +151,8 @@ label {
 
 .pretty {
 	background: #9DCD85;
+}
+.map {
+    height: 35vw;
+    width: 100%;
 }
