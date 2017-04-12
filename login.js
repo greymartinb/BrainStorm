@@ -25,6 +25,13 @@ var exists = false;
 var users = database.ref("/users");
 var name = "";
 
+// USER DOESN'T KNOW WHAT MEET SMARTER IS
+
+$("#clicky").on("click", function(event) {
+    $(".firstChoice").hide();
+    $(".whatAreWe").removeClass("hidden");
+});
+
 // USER PICKS EXISTING USER OR NEW USER.
 
 $(".user").on("click", function(event) {
