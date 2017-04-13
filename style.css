@@ -128,9 +128,11 @@ html {
   color: #064382;
   border: 1px solid #064382;
 }
-/* End */
-
-/* Styling for Event Menu / Hamburger */
+#weather {
+font-family: 'Kalam','Roboto', sans-serif;
+font-size: 24px;
+text-align: center;
+}
 
 .panel-heading {
     background: #064382!important;
