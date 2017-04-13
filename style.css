@@ -3,7 +3,25 @@ label {
     margin-left: -5px;
     font-weight: 700;
 }
-
+body {
+  background: url(images/pagebackground.jpeg);
+  background-size: cover;
+}
+.big {
+  padding: 0px;
+}
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #064382;
+}
+#navText {
+  padding-top: 10px;
+  color: #FFFFFF;
+  text-align: center;
+}
 #map {
     height: 400px;
     width: 100%;
@@ -12,61 +30,126 @@ label {
     margin-bottom: 15px;
     overflow: auto;
 }
-
 #notificationShow {
     text-align: center;
     font-weight: 700;
     font-size: 14px;
     clear: both;
 }
-
 #clicky:hover {
     text-decoration: underline;
 }
-
 .big {
     width: 100%;
 }
-
 .jumbotron {
     width: 100%;
     text-align: center;
-    background: url(mapBack.png);
+    /*background: url(images/banner.jpeg);*/
+    background-color: #064382;
 }
-
+.jumbotron h1 {
+  font-family: 'Kalam', cursive;
+  font-size: 102px;
+  color: #FFFFFF;
+}
+.user {
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+  color: #064382;
+  margin: 40px 10px 30px 10px;
+  border: 1px solid #064382;
+}
 .panel-heading {
 	background: #93D3F6!important;
 }
-
-.user {
-    margin: 80px auto 10px auto;
+#clicky {
+  font-family: 'Kalam','Roboto', sans-serif;
+  font-size: 28px;
+  padding-bottom: 10px;
+  color: #064382;
 }
-
 .firstChoice {
-    height: 200px;
-    width: 400px;
+    height: 25%;
+    width: 50%;
     text-align: center;
     margin: 10px auto;
-    border: 1px solid #cccccc;
+    border: 5px solid #064382;
     border-radius: 4px;
 }
+.loginStyle {
+  text-align: center;
+  margin-left: 110px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
 
+}
 .existing {
     height: 280px;
     width: 400px;
     margin: 10px auto;
-    border: 1px solid #cccccc;
+    border: 5px solid #064382;
     border-radius: 4px;
 }
-
 .new {
-    height: 415px;
+    height: 475px;
     width: 400px;
     margin: 10px auto;
-    border: 1px solid #cccccc;
+    border: 5px solid #064382;
     border-radius: 4px;
+    padding-bottom: 5px;
 }
+#visual {
+  width: 75%;
+  height: 75%;
+  border: 5px solid #064382;
+}
+.appInfo {
+  font-family: 'Kalam','Roboto', sans-serif;
+  font-size: 28px;
+}
+.list {
+  font-family: 'Roboto', sans-serif;
+  font-size: 17px;
+  list-style: none;
+}
+/* Back to Login button Styling */
+#backToLogin {
+  padding: 0;
+}
+#showy {
+  margin-right: 150px;
+  margin-top: 25px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+  color: #064382;
+  border: 1px solid #064382;
+}
+/* End */
 
+/* Styling for Event Menu / Hamburger */
+#showTable {
+    display: inline;
+    float: right;
+    z-index: 1000;
+    position: absolute;
+    margin: auto 5px auto calc(100% - 26px);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.panel-heading {
+    background: #064382!important;
+    vertical-align: middle;
+    position: relative;
+}
+.eventPanel {
+  font-family: 'Kalam','Roboto', sans-serif;
+  font-size: 24px;
+  color: #FFFFFF;
+}
+/* End */
 .accessGranted {
     color: green;
 }
@@ -85,23 +168,20 @@ label {
 
 .notAs {
     text-align: left;
+    width: 40%;
 }
 
 .jaunty {
     float: left;
     margin-top: 15px;
 }
-
-.list {
-    list-style: none;
-}
-
 .sad {
     clear: both;
 }
 
 .header {
     height: 10%;
+    margin-bottom: 50px;
 }
 
 .body {
@@ -155,4 +235,7 @@ label {
 .map {
     height: 35vw;
     width: 100%;
+}
+#map {
+  border: 5px solid #064382;
 }

@@ -32,6 +32,11 @@ $("#clicky").on("click", function(event) {
     $(".whatAreWe").removeClass("hidden");
 });
 
+$("#showy").on("click", function(event){
+  $(".whatAreWe").addClass("hidden");
+  $(".firstChoice").show();
+});
+
 // USER PICKS EXISTING USER OR NEW USER.
 
 $(".user").on("click", function(event) {
@@ -45,6 +50,15 @@ $(".user").on("click", function(event) {
         // ELSE SHOW new.
         $(".new").removeClass("hidden");
     }
+});
+
+$("#backForCreate").on("click", function(event) {
+  event.preventDefault;
+  $(".new").addClass("hidden");
+});
+$("#backForExisting").on("click", function(event) {
+  event.preventDefault;
+  $(".existing").addClass("hidden");
 });
 
 // SNAPSHOT OF CURRENT DATABASE CREATED.
@@ -92,8 +106,6 @@ $("#login").on("click", function(event) {
 $("#create").on("click", function(event) {
     exists = false;
     event.preventDefault();
-
-    console.log("third event")
 
     // CAPTURE NEW USER INFO FROM FORM.
     userName = $("#userNameInput").val().trim();
