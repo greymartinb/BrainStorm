@@ -154,7 +154,7 @@ function exist() {
         $("#notificationShow").text("Hello " + name + "! Access Granted.  Redirecting you now.").addClass("accessGranted").removeClass("accessDenied");
         // REDIRECT DELAYED 5 SECONDS.
         setTimeout(function() {
-            window.location.replace("timeAppendingFunction.html");
+            window.location.replace("index.html");
         }, 3000);
     } else {
         // ELSE (exists being false) NOTIFY USER ACCESS IS DENIED.
