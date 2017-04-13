@@ -50,7 +50,7 @@
   //location selector//
   $("#add-userSchedule").on("click", function(event) {
     event.preventDefault();
-    $("#warning").empty();
+
 
     ///defining methods inside of click event//
     var printUserSchedule = function() {
@@ -89,6 +89,11 @@
     var preventUserError = function() {
       if (moment(userArrival, "hh:mm a").isAfter(moment(userDeparture, "hh:mm a"))) {
         $("#warning").html("Your end time can't be before your start time.");
+        $("#warning").removeClass("hidden");
+                setTimeout(function() {
+                    $("#warning").empty();
+                    $("#warning").addClass("hidden");
+                }, 5000);
       }
       else {
         findEventStart(userArrival);
@@ -109,6 +114,11 @@
               overLapEnd = moment(overbookedCheck[i][1][ix].userDeparture, "hh:mm a").format('hh:mm a');
               if (moment(userArrival, "hh:mm a").isBefore(moment(overLapEnd, "hh:mm a")) && moment(overLapStart, "hh:mm a").isBefore(moment(userDeparture, "hh:mm a"))) {
                 $("#warning").html("You can't double book yourself, this time overlaps another time you already selected");
+                $("#warning").removeClass("hidden");
+                setTimeout(function() {
+                    $("#warning").empty();
+                    $("#warning").addClass("hidden");
+                }, 5000);
                 return;
               }
             }
@@ -185,6 +195,11 @@
 
       if (moment(userDeparture, "hh:mm a").isBefore(moment())) {
         $("#warning").html("Can't add past time");
+        $("#warning").removeClass("hidden");
+                setTimeout(function() {
+                    $("#warning").empty();
+                    $("#warning").addClass("hidden");
+                }, 5000);
       }
       return database.ref("/meetUps/"+location).set(newMeetUpData);
     }
