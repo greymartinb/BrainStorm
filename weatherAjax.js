@@ -14,7 +14,7 @@ var updateWeather = function(){
     	method: "GET",
     	 success: function(result){
         console.log(result);
-        $("#weather").html( "<img src = http://openweathermap.org/img/w/" + result.weather[0].icon + ".png> </img><h3>" +result.main.temp +"&deg; F </h3>" );
+        $("#weather").html( "<img src = http://openweathermap.org/img/w/" + result.weather[0].icon + ".png> </img> Current Temperature : " +result.main.temp +"&deg; F" );
     }})
 };
 
