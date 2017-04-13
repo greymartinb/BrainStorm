@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Meet Smarter</title>
+      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script src="map.js"></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtU7Z_r_-qxKBRmrC7TYUbPkYp1ECJJgE&callback=initMap">
+    </script>
+    <script src="weatherAjax.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class= "row">
+        <div class="col-lg-12">
+          <div id="map">
+          </div>
+        </div>
+        </div>
+        <div class="row">
+          <div id="weather">
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Add Event</h3>
+          </div>
+          <div class="panel-body">
+            <div id="userName"></div>
+            <form role="form">
+              <div class="form-group">
+                <label for="location-input">Select Location</label>
+                <select class="form-control" id="location-input">
+                  <option>Please pick a location..</option>
+                  <option>Bennu Coffee</option>
+                  <option>Epoch Coffee</option>
+                  <option>Mozarts Coffee Roasters</option>
+                  <option>Radio</option>
+                  <option>Wright Bros</option>
+                  <option>Thunderbird Coffee</option>
+                  <option>Dominican Joe</option>
+                  <option>Figure 8</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="arrival-input">Arrival</label>
+                <input class="form-control" id= "arrival-input" type= "time">
+              </div>
+              <div class="form-group">
+                <label for="departure-input">Departure</label>
+                <input class="form-control" id="departure-input" type="time">
+              </div>
+              <button class="btn pretty" id="add-userSchedule" type="button">Submit</button>
+            </form>
+            <div id="warning"></div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Event Schedule</h3>
+          </div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th><b>Location</b></th>
+                <th><b>User</b></th>
+                <th><b>Arrival Time</b></th>
+                <th><b>Departure Time</b></th>
+                <th><b>Status</b></th>
+              </tr>
+            </thead>
+            <tbody class="tableData">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  <script type="text/javascript" src="login.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+
+  </body>
+</html>
