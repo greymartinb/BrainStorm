@@ -4,8 +4,10 @@
   <head>
     <meta charset="UTF-8">
     <title>Time appending function</title>
-      <link rel="stylesheet" href="style.css">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Permanent+Marker|Kalam" rel="stylesheet">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
@@ -15,8 +17,13 @@
     </script>
     <script src="weatherAjax.js"></script>
   </head>
-
   <body>
+    <div class="big header container" style="
+    margin-bottom: 0px">
+        <div class="jumbotron">
+            <h1>Meet Smarter 	&reg;</h1>
+        </div>
+    </div>
     <div class="container">
       <div class= "row">
         <div class="col-lg-12">
@@ -31,7 +38,7 @@
       <div class="col-lg-12">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">Add Event</h3>
+            <h3 class="panel-title eventPanel">Add Event</h3>
           </div>
           <div class="panel-body">
             <div id="userName"></div>
@@ -58,37 +65,31 @@
                 <label for="departure-input">Departure</label>
                 <input class="form-control" id="departure-input" type="time">
               </div>
-              <!-- <div class="form-group">
-                <label for="status-input">Status:</label>
-                <select class="form-control" id="status-input">
-                  <option>Checked In</option>
-                  <option>Checked Out</option>
-                </select>
-              </div> -->
-              <button class="btn pretty" id="add-userSchedule" type="button">Submit</button>
+              <button class="btn btn-default" id="add-userSchedule" type="button">Submit</button>
             </form>
           </div>
         </div>
       </div>
       <br>
       <div class="col-lg-12">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Event Schedule</h3>
-          </div>
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th><b>Location</b></th>
-                <th><b>User</b></th>
-                <th><b>Arrival Time</b></th>
-                <th><b>Departure Time</b></th>
-                <th><b>Status</b></th>
-              </tr>
-            </thead>
-            <tbody class="tableData">
-            </tbody>
-          </table>
+        <div class="panel-heading">
+                    <h3 class="panel-title eventPanel">Event Schedule</h3>
+                    <img src="images/favicon-angle-down.ico" alt="View the Event Schedule." id="showTable">
+                </div>
+                <table class="table table-striped hidden" id="eventSchedule">
+                    <thead>
+                        <tr>
+                            <th><b>Location</b></th>
+                            <th><b>User</b></th>
+                            <th><b>Arrival Time</b></th>
+                            <th><b>Departure Time</b></th>
+                            <th><b>Status</b></th>
+                        </tr>
+                    </thead>
+                    <tbody class="tableData">
+                    </tbody>
+                </table>
+              <br><br>
         </div>
       </div>
     </div>
@@ -127,7 +128,7 @@
   var database = firebase.database();
 
   //displays user's name
-  $("#userName").html('<h3>' + name + '</h3>');
+  $("#userName").html('<h3>Welcome, ' + name + '.</h3>');
 
   //location selector//
   $("#add-userSchedule").on("click", function(event)
@@ -234,7 +235,7 @@ console.log(eventStart);
 
       if (allUsers.indexOf(name) === -1){
         var userPush = {
-          name: name, 
+          name: name,
           userArrival: userArrival,
           userDeparture: userDeparture,
         }
@@ -260,11 +261,11 @@ console.log(eventStart);
           users: allUsers,
           userCount: userCount,
         };
-      } 
+      }
 // console.log(newMeetUpData.users);
 // console.log("meetupdata " + newMeetUpData);
 
-      return database.ref("/meetUps/"+location).set(newMeetUpData);   
+      return database.ref("/meetUps/"+location).set(newMeetUpData);
     }
 
     var location = $("#location-input").val();
@@ -334,7 +335,7 @@ console.log(value.users[0].name);
         meetUpLine.append(meetStatus);
 
         // APPEND TO EXISTING TABLE - deezMeetUps
-        
+
         $(".tableData").append(meetUpLine);
         var users = [];
         var userTime = [];
@@ -358,7 +359,7 @@ console.log(value.users[0].name);
             locality= value.location,
             peopleHere= userTime
           ]
-        
+
         // (value.location, users)
 // console.log("new functionality " + overbookedCheck);
 // console.log(overbookedCheck[0]);
@@ -420,7 +421,19 @@ console.log(value.users[0].name);
   }
   displayMeetUp();
 
-  </script>
+// Hamburger function for Event Panel
+  $("#showTable").on("click", function() {
+        if ($("#eventSchedule").attr("class") === "table table-striped hidden") {
+            $("#eventSchedule").removeClass("hidden");
+            $("#showTable").attr("src", "images/favicon-angle-up.ico");
+        } else {
+            $("#eventSchedule").addClass("hidden");
+            $("#showTable").attr("src", "images/favicon-angle-down.ico");
+        }
+        console.log("WORKING")
+    });
 
+
+  </script>
   </body>
 </html>

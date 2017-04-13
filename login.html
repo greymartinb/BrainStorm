@@ -8,9 +8,7 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto|Permanent+Marker|Walter+Turncoat" rel="stylesheet">
-    <!-- Viewport -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Permanent+Marker|Kalam" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="style.css">
     <!-- jQuery -->
@@ -20,16 +18,16 @@
 </head>
 
 <body>
-    <div class="big header">
+    <div class="big header container">
         <div class="jumbotron">
-            <h1>Meet Smarter</h1>
+            <h1>Meet Smarter &reg;</h1>
         </div>
     </div>
-    <div class="big body container">
+    <div class="big container">
         <div class="firstChoice">
             <button class="btn btn-default user" value="existing" type="submit">Login</button>
             <button class="btn btn-default user" value="new" type="submit">Sign Up</button>
-            <p id="clicky" class="teal">What is Meet Smarter?</p>
+            <p id="clicky">About Meet Smarter</p>
         </div>
         <div class="row">
             <div class="existing hidden">
@@ -71,7 +69,7 @@
                             <label for="nameInput">Name</label>
                             <input class="form-control" id="nameInput" type="text" placeholder="Jane Smith">
                             <br>
-                        <button class="btn btn-default" id="backForCreate" type="submit">Back</button>
+                        <button class="btn btn-default" id="backForCreate" type="text">Back</button>
                         <button class="btn btn-default" id="create" type="submit">Submit</button>
                         </div>
                     </form>
@@ -83,39 +81,39 @@
                     <img id="visual" src="images/imhere.jpg" class="map" alt="A visual representation of the Meet Smarter's functionality.">
                 </div>
                 <div class="notAs jaunty col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <p class="appInfo"><strong>Not sure where to meet?</strong>
+                    <p class="appInfo mapGrey"><strong>Venue Finder</strong>
                         <ul class="list">
-                            <li>Use Meet Smarter's map functionality to meet at a local coffee shop.</li>
+                            <li>We've narrowed down your venue search to only the best coffee shops that promote productivity.</li>
                         </ul>
                     </p>
-                    <p class="appInfo"><strong>Need in person help?</strong>
+                    <p class="appInfo teal"><strong>Visibility</strong>
                         <ul class="list">
-                            <li>Use Meet Smarter to view upcoming meets ups among your cohort.</li>
+                            <li>We provide a clear look at who's where. Public "events" are created when two or more team members are at a specific location.</li>
                         </ul>
                     </p>
-                    <p class="appInfo"><strong>Want to invite others to your meet up?</strong>
+                    <p class="appInfo coral"><strong>Real-time Updates</strong>
                         <ul class="list">
-                            <li>Meet Smarter's slack integration alerts your cohort when you create an event.  No need to send out invites!</li>
+                            <li>Join Slack channel <em>#meetsmarter</em> for notifications from SmarterBot when team members are added to the schedule.</li>
                         </ul>
                     </p>
-                    <p class="appInfo"><strong>Plan on meeting outside?</strong>
+                    <p class="appInfo purple"><strong>Plan Ahead</strong>
                         <ul class="list">
-                            <li>Meet Smarter's weather integration helps ensure your meet up doesn't get rained out!</li>
+                            <li>Planning on meeting outdoors? Check the weather widget to make sure you won't get rained on.</li>
                         </ul>
                     </p>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" id="backToLogin">
-                  <button class="btn btn-default user" id="showy">Back to Login</button>
+                  <button class="btn btn-default" id="showy">Back to Login</button>
                 </div>
-
             </div>
         </div>
           <div id="notificationShow"></div>
     <nav class="navbar navbar-default navbar-bottom" role="navigation">
   <div class="container">
-    <p id="navText">Owned by Grey.<p>
+    <p id="navText">&reg; Grey<p>
   </div>
-</nav>
+    </nav>
+</div>
     <script type="text/javascript" src="login.js"></script>
 </body>
 
