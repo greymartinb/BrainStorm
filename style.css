@@ -7,6 +7,9 @@ body {
   background: url(images/pagebackground.jpeg);
   background-size: cover;
 }
+html {
+  min-height: 100%;
+}
 .big {
   padding: 0px;
 }
@@ -128,17 +131,7 @@ body {
 /* End */
 
 /* Styling for Event Menu / Hamburger */
-#showTable {
-    display: inline;
-    float: right;
-    z-index: 1000;
-    position: absolute;
-    margin: auto 5px auto calc(100% - 26px);
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
+
 .panel-heading {
     background: #064382!important;
     vertical-align: middle;
@@ -174,14 +167,22 @@ body {
 .jaunty {
     float: left;
     margin-top: 15px;
-<<<<<<< Updated upstream
-=======
+/*<<<<<<< Updated upstream
+=======*/
 }
 
-.list {
+.table{
+  background-color: white;
+
+}
+
+#weather{
+}
+
+/*.list {
     list-style: none;
 >>>>>>> Stashed changes
-}
+}*/
 .sad {
     clear: both;
 }
@@ -239,7 +240,7 @@ body {
 .pretty {
 	background: #9DCD85;
 }
-<<<<<<< Updated upstream
+/*<<<<<<< Updated upstream*/
 .map {
     height: 35vw;
     width: 100%;
@@ -247,10 +248,10 @@ body {
 #map {
   border: 5px solid #064382;
 }
-=======
+/*=======
 
 .map{
     height: 35vw;
     width: 100%;
 }
->>>>>>> Stashed changes
+>>>>>>> Stashed changes*/

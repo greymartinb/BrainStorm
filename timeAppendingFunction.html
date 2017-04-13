@@ -4,15 +4,11 @@
   <head>
     <meta charset="UTF-8">
     <title>Time appending function</title>
-<<<<<<< Updated upstream
+<!-- <<<<<<< Updated upstream -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto|Permanent+Marker|Kalam" rel="stylesheet">
-=======
-      <link rel="stylesheet" href="style.css">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
->>>>>>> Stashed changes
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
@@ -22,7 +18,7 @@
     </script>
     <script src="weatherAjax.js"></script>
   </head>
-<<<<<<< Updated upstream
+
   <body>
     <div class="big header container" style="
     margin-bottom: 0px">
@@ -30,34 +26,23 @@
             <h1>Meet Smarter 	&reg;</h1>
         </div>
     </div>
-=======
 
-  <body>
->>>>>>> Stashed changes
     <div class="container">
       <div class= "row">
+                  <div class = "col-lg-4 col-lg-offset-4" id="weather">
+            </div>
         <div class="col-lg-12">
           <div id="map">
           </div>
         </div>
         </div>
         <div class="row">
-<<<<<<< Updated upstream
-          <div id="weather">
-=======
-          <div id="weather" class = "col-md-6">
->>>>>>> Stashed changes
-        </div>
-      </div>
-      <div class="col-lg-12">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-<<<<<<< Updated upstream
+          <div class="col-lg-3 col-md-3">
+
+            <div class="panel panel-default">
+            <div class="panel-heading">
             <h3 class="panel-title eventPanel">Add Event</h3>
-=======
-            <h3 class="panel-title">Add Event</h3>
->>>>>>> Stashed changes
-          </div>
+            </div>
           <div class="panel-body">
             <div id="userName"></div>
             <form role="form">
@@ -83,31 +68,19 @@
                 <label for="departure-input">Departure</label>
                 <input class="form-control" id="departure-input" type="time">
               </div>
-<<<<<<< Updated upstream
               <button class="btn btn-default" id="add-userSchedule" type="button">Submit</button>
-=======
-              <!-- <div class="form-group">
-                <label for="status-input">Status:</label>
-                <select class="form-control" id="status-input">
-                  <option>Checked In</option>
-                  <option>Checked Out</option>
-                </select>
-              </div> -->
-              <button class="btn" id="add-userSchedule" type="button">Submit</button>
->>>>>>> Stashed changes
             </form>
           </div>
         </div>
       </div>
-      <br>
-      <div class="col-lg-12">
-<<<<<<< Updated upstream
+      <div class="col-lg-1"> 
+      </div>
+      <div class="col-lg-8 col-md-8">
         <div class="panel-heading">
                     <h3 class="panel-title eventPanel">Event Schedule</h3>
-                    <img src="images/favicon-angle-down.ico" alt="View the Event Schedule." id="showTable">
                 </div>
-                <table class="table table-striped hidden" id="eventSchedule">
-                    <thead>
+                <table class="table" id="eventSchedule">
+                    <thead> 
                         <tr>
                             <th><b>Location</b></th>
                             <th><b>User</b></th>
@@ -120,416 +93,13 @@
                     </tbody>
                 </table>
               <br><br>
-=======
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Event Schedule</h3>
-          </div>
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th><b>Location</b></th>
-                <th><b>User</b></th>
-                <th><b>Arrival Time</b></th>
-                <th><b>Departure Time</b></th>
-                <th><b>Status</b></th>
-              </tr>
-            </thead>
-            <tbody class="tableData">
-            </tbody>
-          </table>
->>>>>>> Stashed changes
         </div>
       </div>
-    </div>
+      </div>
+
 
   <script type="text/javascript" src="login.js"></script>
+  <script type="text/javascript" src="index.js"></script>
 
-  <script>
-
-  //checks if user has logged in
-<<<<<<< Updated upstream
-  if (name[0] === undefined) {
-=======
-  if (name[0] === "[") {
->>>>>>> Stashed changes
-    window.location.replace("login.html");
-  }
-
-  updateWeather();
-  //global variables//
-  var eventStart;
-  var eventEnd;
-  var location;
-  var userName;
-  var userArrival;
-  var userDeparture;
-  var userStatus;
-  var thisMeetUp = {};
-  var allMeetUps = {};
-  var allUsers = [];
-  var userCount = 1;
-  var overWriteTime = false;
-  var overWriteUser = false;
-  var overbookedCheck = [];
-  var users = [];
-  var userTime = [];
-<<<<<<< Updated upstream
-  var overLapStart;
-  var overLapEnd;
-=======
->>>>>>> Stashed changes
-
-  // Create a variable to reference the database
-  var database = firebase.database();
-
-  //displays user's name
-<<<<<<< Updated upstream
-  $("#userName").html('<h3>Welcome, ' + name + '.</h3>');
-=======
-  $("#userName").html('<h3>' + name + '</h3>');
->>>>>>> Stashed changes
-
-  //location selector//
-  $("#add-userSchedule").on("click", function(event)
-  {
-    event.preventDefault();
-
-    ///defining methods inside of click event//
-    var printUserSchedule = function() {
-     $(".tableData").append(" <tr><td> "
-      + location + "</td><td>"
-      + name + "</td><td>"
-      + userArrival+"</td><td>"
-      + userDeparture + "</td><td>"
-      + userStatus );
-    };
-
-    var findEventStart =  function(beginTime) {
-// console.log(eventStart);
-// console.log(beginTime);
-      if ( eventStart === undefined || eventStart === "Invalid date") {
-        eventStart = moment(beginTime, "hh:mm a").format("hh:mm a");
-      }
-
-      else if (moment(eventStart, "hh:mm a").isAfter(moment(beginTime, "hh:mm a"))) {
-        eventStart = moment(beginTime, "hh:mm a").format("hh:mm a");
-      }
-console.log(eventStart);
-    };
-
-    var findEventEnd =  function(stopTime) {
-// console.log(eventEnd);
-// console.log(stopTime);
-      if ( eventEnd === undefined || eventEnd === "Invalid date") {
-        eventEnd = moment(stopTime, "hh:mm a").format("hh:mm a");
-      }
-
-      else if (moment(eventEnd, "hh:mm a").isBefore(moment(stopTime, "hh:mm a"))) {
-        eventEnd = moment(stopTime, "hh:mm a").format("hh:mm a");
-      }
-        // $("#" + location + "End").html(eventEnd);
-// console.log(eventEnd);
-    };
-
-    var preventUserStupidity = function() {
-      if (moment(userArrival, "hh:mm a").isAfter(moment(userDeparture, "hh:mm a"))) {
-        alert("try again stupid");
-      }
-      else {
-        findEventStart(userArrival);
-        findEventEnd(userDeparture);
-      };
-    };
-
-    function createMeetUp(name, location, userArrival, userDeparture) {
-<<<<<<< Updated upstream
-      for ( i=0; i < overbookedCheck.length; i++) {
-        console.log(overbookedCheck[i]);
-        for (ix = 0; ix < overbookedCheck[i][1].length; ix++) {
-          if (name === overbookedCheck[i][1][ix].name) {
-            console.log(name +" = " +overbookedCheck[i][1][ix].name);
-            overLapStart = moment(overbookedCheck[i][1][ix].userArrival, "hh:mm a").format('hh:mm a');
-            overLapEnd = moment(overbookedCheck[i][1][ix].userDeparture, "hh:mm a").format('hh:mm a');
-            if (moment(userArrival, "hh:mm a").isBefore(moment(overLapEnd, "hh:mm a")) && moment(overLapStart, "hh:mm a").isBefore(moment(userDeparture, "hh:mm a"))) {
-              alert("You can't double book yourself, this time overlaps another time you already selected");
-              return;
-            }
-            else if (moment(userArrival, "hh:mm a") === moment(overLapStart, "hh:mm a") && moment(userDeparture, "hh:mm a") === moment(overLapEnd, "hh:mm a")) {
-              alert("You can't double book yourself, this time overlaps another time you already selected");
-              return;
-            }
-          }
-          console.log(overbookedCheck[i][1][ix].name);
-        }
-      }
-=======
->>>>>>> Stashed changes
-
-      var snapy =[];
-      var timy = [];
-
-      database.ref("/meetUps/"+location).on("child_added", function(snapshot, prevChildKey) {
-        overWriteTime = false;
-        overWriteUser = false;
-
-        var dbSnap = snapshot.val();
-        snapy = dbSnap;
-        timy.push(dbSnap);
-
-        if (dbSnap.userCount === 1) {
-          userCount = dbSnap.userCount + 1;
-        }
-        else {
-          userCount = 1;
-        }
-
-        if (dbSnap.userArrival === userArrival && dbSnap.userDeparture === userDeparture) {
-          overWriteUser = true;
-        }
-        else{
-          overWriteTime = true;
-        }
-      });
-
-      if (snapy) {
-        allUsers = snapy;
-      }
-
-      if (allUsers.indexOf(name) === -1){
-        var userPush = {
-<<<<<<< Updated upstream
-          name: name,
-=======
-          name: name, 
->>>>>>> Stashed changes
-          userArrival: userArrival,
-          userDeparture: userDeparture,
-        }
-        allUsers.push(userPush);
-      }
-// console.log("allusers "+allUsers);
-      if (overWriteTime) {
-        findEventStart(timy[0]);
-        findEventEnd(timy[2]);
-        var newMeetUpData = {
-          location: location,
-          userArrival: eventStart,
-          userDeparture: eventEnd,
-          users: allUsers,
-          userCount: userCount,
-        };
-      }
-      else {
-        var newMeetUpData = {
-          location: location,
-          userArrival: userArrival,
-          userDeparture: userDeparture,
-          users: allUsers,
-          userCount: userCount,
-        };
-<<<<<<< Updated upstream
-      }
-// console.log(newMeetUpData.users);
-// console.log("meetupdata " + newMeetUpData);
-
-      return database.ref("/meetUps/"+location).set(newMeetUpData);
-=======
-      } 
-// console.log(newMeetUpData.users);
-// console.log("meetupdata " + newMeetUpData);
-
-      return database.ref("/meetUps/"+location).set(newMeetUpData);   
->>>>>>> Stashed changes
-    }
-
-    var location = $("#location-input").val();
-    var userName = name
-    var userArrival = moment($("#arrival-input").val(), "hh:mm a").format('hh:mm a');
-    var userDeparture = moment($("#departure-input").val(), "hh:mm a").format('hh:mm a');
-    preventUserStupidity();
-    createMeetUp(name,location,userArrival,userDeparture);
-
-
-  });
-
-  function displayMeetUp() {
-
-
-    var count = 0;
-
-    database.ref("/meetUps").on("value", function(snapshot) {
-      $(".tableData").empty();
-
-      newMeetUp = snapshot.val();
-
-      $.each(newMeetUp, function(index, value) {
-
-        getUserStatus(value.userArrival, value.userDeparture);
-console.log(value);
-console.log(value.users);
-console.log(value.users[0].name);
-
-
-// console.log(newMeetUp);
-// console.log(snapshot);
-
-        // CREATE TABLE
-
-        // ROW
-        var meetUpLine = $("<tr id=\"meetUp" + count + "\">");
-
-        // CELL - ORGANIZOR NAME
-        var meetOrganizor = $("<td id=\"organizor" + count + "\">");
-
-        // CELL - LOCATION
-        var meetLocation = $("<td id=\"location" + count + "\">");
-
-        // CELL - START TIME
-        var meetStart = $("<td id=\"start" + count + "\">");
-
-        // CELL - END TIME
-        var meetEnd = $("<td id=\"end" + count + "\">");
-
-        // CELL - DURATION
-        var meetDuration = $("<td id=\"duration" + count + "\">");
-
-        // CELL - STATUS
-        var meetStatus = $("<td id=\"status" + count + "\">")
-
-        // APPEND CELLS TO ROW
-
-        meetUpLine.append(meetOrganizor);
-
-        meetUpLine.append(meetLocation);
-
-        meetUpLine.append(meetStart);
-
-        meetUpLine.append(meetEnd);
-
-        meetUpLine.append(meetStatus);
-
-        // APPEND TO EXISTING TABLE - deezMeetUps
-<<<<<<< Updated upstream
-
-=======
-        
->>>>>>> Stashed changes
-        $(".tableData").append(meetUpLine);
-        var users = [];
-        var userTime = [];
-        // WRITE TO SCREEN
-        for (i = 0; i < value.users.length; i++) {
-          users.push(value.users[i].name);
-          userTime.push(value.users[i]);
-        }
-        console.log(userTime);
-<<<<<<< Updated upstream
-        $("#organizor" + count).html(users.join(", "));
-=======
-        $("#organizor" + count).html(users);
->>>>>>> Stashed changes
-
-        $("#location" + count).html(value.location);
-
-        $("#start" + count).html(value.userArrival);
-
-        $("#end" + count).html(value.userDeparture);
-
-        $("#status" + count).html(userStatus);
-
-        overbookedCheck[count] = [
-            locality= value.location,
-            peopleHere= userTime
-          ]
-<<<<<<< Updated upstream
-
-        // (value.location, users)
-// console.log("new functionality " + overbookedCheck);
-// console.log(overbookedCheck[0]);
-// console.log(overbookedCheck[1]);
-  // for ( i=0; i < overbookedCheck.length; i++) {
-  //   // console.log(overbookedCheck[i][1]);
-  //   console.log(overbookedCheck[i]);
-  //   for (ix = 0; ix < overbookedCheck[i][1].length; ix++) {
-  //     if (name === overbookedCheck[i][1][ix].name) {
-  //       console.log(name +" = " +overbookedCheck[i][1][ix].name);
-  //       overLapStart = moment(overbookedCheck[i][1][ix].userArrival, "hh:mm a").format('hh:mm a');
-  //       overLapEnd = moment(overbookedCheck[i][1][ix].userDeparture, "hh:mm a").format('hh:mm a');
-  //       if (moment(userArrival, "hh:mm a").isBefore(overLapEnd) && overLapStart.isBefore(moment(userDeparture, "hh:mm a"))) {
-  //         alert("You can't double book yourself, this time overlaps another time you already selected");
-  //         return;
-  //       }
-  //       else if (moment(userArrival, "hh:mm a") === overLapStart && moment(userDeparture, "hh:mm a") === overLapEnd) {
-  //         alert("You can't double book yourself, this time overlaps another time you already selected");
-  //         return;
-  //       }
-  //     }
-  //     console.log(overbookedCheck[i][1][ix].name);
-  //   }
-  // }
-=======
-        
-        // (value.location, users)
-console.log("new functionality " + overbookedCheck);
-console.log(overbookedCheck[0]);
-console.log(overbookedCheck[1]);
->>>>>>> Stashed changes
-
-        startTime = parseInt(value.userArrival);
-        eventStart = moment(value.userArrival, "hh:mm a").format('hh:mm a');
-
-        endTime = parseInt(value.userDeparture);
-        eventEnd = moment(value.userDeparture, "hh:mm a").format('hh:mm a');
-
-        // Calculate duration.
-
-
-        if (endTime - startTime < 100) {
-            duration = (endTime - startTime);
-            $("#duration" + newMeetUp.count).html(duration + " minutes");
-        } else {
-            duration = (endTime - startTime) / 100;
-            $("#duration" + newMeetUp.count).html(duration + " hours");
-        }
-        count ++;
-      })
-    }, function(errorObject) {
-      console.log("Errors handled: " + errorObject.code);
-    });
-
-    function getUserStatus(arrivalTime, departureTime) {
-      if (moment(moment(),"hh:mm a").isBefore(moment(arrivalTime,"hh:mm a"))) {
-        userStatus = "Pre-Arrival"
-      }
-      else if (moment(moment(),"hh:mm a").isAfter(moment(departureTime,"hh:mm a"))) {
-        userStatus = "Departed"
-      }
-      else {
-        userStatus = "Present";
-      }
-    };
-  }
-  displayMeetUp();
-
-<<<<<<< Updated upstream
-// Hamburger function for Event Panel
-  $("#showTable").on("click", function() {
-        if ($("#eventSchedule").attr("class") === "table table-striped hidden") {
-            $("#eventSchedule").removeClass("hidden");
-            $("#showTable").attr("src", "images/favicon-angle-up.ico");
-        } else {
-            $("#eventSchedule").addClass("hidden");
-            $("#showTable").attr("src", "images/favicon-angle-down.ico");
-        }
-        console.log("WORKING")
-    });
-
-
-  </script>
-=======
-  </script>
-
->>>>>>> Stashed changes
   </body>
 </html>
