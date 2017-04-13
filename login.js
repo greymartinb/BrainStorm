@@ -52,57 +52,6 @@ $(".user").on("click", function(event) {
     }
 });
 
-$("#backForCreate").on("click", function(event) {
-  event.preventDefault;
-  $(".new").addClass("hidden");
-});
-$("#backForExisting").on("click", function(event) {
-  event.preventDefault;
-  $(".existing").addClass("hidden");
-});
-
-// SNAPSHOT OF CURRENT DATABASE CREATED.
-database.ref("/users").on("value", function(snapshot) {})
-
-// CAPTURE USERNAME AND PASSWORD FOR LOG IN.
-
-$("#login").on("click", function(event) {
-    exists = false;
-
-    console.log("second event");
-
-    event.preventDefault();
-
-    // CAPTURE EXISTING USER INFO FROM FORM.
-    userName = $("#userName").val().trim();
-    password = $("#password").val().trim();
-
-    // CREATE SNAPSHOT OF DATABASE WHEN CHILD IS ADDED.
-    database.ref("/users").on("child_added", function(snapshot) {
-        // SNAPSHOT SAVED AS submission.
-        var submission = snapshot.val();
-
-        // AUTHENTICATE
-
-        // IF USERNAME AND PASSWORD ENETERED IN FORM MATCH INFO IN DATABASE...
-        if ((submission.userName === userName) && (submission.password === password)) {
-            // exists IS TRUE.
-            exists = true;
-
-            // PULL NAME FROM submission.
-            name = submission.name;
-        }
-
-    }, function(errorObject) {
-        console.log("Errors handled: " + errorObject.code);
-    });
-
-
-    exist();
-});
-
-// DUPLICATE CHECK
-
 $("#create").on("click", function(event) {
     exists = false;
     event.preventDefault();
@@ -145,6 +94,59 @@ $("#create").on("click", function(event) {
         console.log("here");
     }
 });
+
+$("#backForCreate").on("click", function(event) {
+  if (event.keyCode === 13){
+    event.preventDefault;
+  }
+  $(".new").addClass("hidden");
+});
+$("#backForExisting").on("click", function(event) {
+  event.preventDefault;
+  $(".existing").addClass("hidden");
+});
+
+// SNAPSHOT OF CURRENT DATABASE CREATED.
+database.ref("/users").on("value", function(snapshot) {})
+
+// CAPTURE USERNAME AND PASSWORD FOR LOG IN.
+
+$("#login").on("click", function(event) {
+    exists = false;
+
+    event.preventDefault();
+
+    // CAPTURE EXISTING USER INFO FROM FORM.
+    userName = $("#userName").val().trim();
+    password = $("#password").val().trim();
+
+    // CREATE SNAPSHOT OF DATABASE WHEN CHILD IS ADDED.
+    database.ref("/users").on("child_added", function(snapshot) {
+        // SNAPSHOT SAVED AS submission.
+        var submission = snapshot.val();
+
+        // AUTHENTICATE
+
+        // IF USERNAME AND PASSWORD ENETERED IN FORM MATCH INFO IN DATABASE...
+        if ((submission.userName === userName) && (submission.password === password)) {
+            // exists IS TRUE.
+            exists = true;
+
+            // PULL NAME FROM submission.
+            name = submission.name;
+        }
+
+    }, function(errorObject) {
+        console.log("Errors handled: " + errorObject.code);
+    });
+
+
+    exist();
+});
+
+// DUPLICATE CHECK
+
+
 
 // EXISTING USER AUTHENTICATION
 function exist() {
